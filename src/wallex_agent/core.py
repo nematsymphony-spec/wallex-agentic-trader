@@ -10,7 +10,7 @@ from typing import Dict, List, Optional
 from zoneinfo import ZoneInfo
 
 
-SYMBOLS = ("BTCTMN", "ETHTMN", "SOLTMN")
+SYMBOLS = ("BTCTMN", "ETHTMN", "SOLTMN", "PUMPTMN")
 D = Decimal
 
 
@@ -174,11 +174,11 @@ def risk_check(decision: Decision, view: MarketView, portfolio: Portfolio, setti
             return None, "position_already_open"
         if len(portfolio.positions) >= settings.max_open_positions:
             return None, "max_open_positions"
-        notional = min(equity * settings.target_position_fraction, equity * settings.max_position_fraction, portfolio.cash / (D(1) + settings.taker_fee_fraction))
+        desired_notional = min(equity * settings.target_position_fraction, equity * settings.max_position_fraction, portfolio.cash / (D(1) + settings.taker_fee_fraction))
+        liquidity_cap = min(view.ask_quote_depth, view.bid_quote_depth) / settings.min_depth_multiple
+        notional = min(desired_notional, liquidity_cap)
         if notional < settings.min_order_tmn:
-            return None, "below_min_order"
-        if min(view.ask_quote_depth, view.bid_quote_depth) < notional * settings.min_depth_multiple:
-            return None, "insufficient_two_sided_depth"
+            return None, "insufficient_two_sided_depth" if liquidity_cap < settings.min_order_tmn else "below_min_order"
         price = view.ask
         qty = notional / price
         side = "BUY"
@@ -186,10 +186,10 @@ def risk_check(decision: Decision, view: MarketView, portfolio: Portfolio, setti
         pos = portfolio.positions.get(decision.symbol)
         if pos is None:
             return None, "no_position"
-        notional = pos.quantity * view.bid
-        if view.bid_quote_depth < notional * settings.min_depth_multiple:
+        notional = min(pos.quantity * view.bid, view.bid_quote_depth / settings.min_depth_multiple)
+        if notional < settings.min_order_tmn:
             return None, "insufficient_bid_depth"
-        price, qty, side = view.bid, pos.quantity, "SELL"
+        price, qty, side = view.bid, notional / view.bid, "SELL"
     decision_hash = canonical_hash(asdict(decision))
     order_id = "sc-" + canonical_hash({"decision": decision_hash, "timestamp": view.timestamp, "side": side})[:24]
     return OrderIntent(view.symbol, side, qty, price, notional, order_id, decision_hash), "approved"

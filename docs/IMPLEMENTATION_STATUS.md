@@ -2,7 +2,7 @@
 
 | Item | Status | Evidence / next requirement |
 |---|---|---|
-| Public market discovery and package exclusion | Done | `markets` reads Wallex endpoints at runtime; three target markets allowed in the observed response. |
+| Public market discovery and package exclusion | Done | `markets` reads Wallex endpoints at runtime; BTC, ETH, SOL and PUMP/TMN allowed in the observed response. |
 | Market data and features | Done | Completed hourly OHLCV and top-five order-book levels, conservative validation. |
 | Structured OpenAI decision | Implemented, unverified live | Strict JSON schema and fail-closed `HOLD`; no OpenAI API key in this environment. |
 | Risk limits | Implemented for simulation/shadow | 20% per position, two positions, 2% daily buy pause, 5% starting-equity buy pause, spread/depth gates. |

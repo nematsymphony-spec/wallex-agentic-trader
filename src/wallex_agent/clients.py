@@ -9,7 +9,7 @@ import urllib.request
 from decimal import Decimal
 from typing import Any, Dict, List
 
-from .core import Decision, MarketView, canonical_hash, validate_decision
+from .core import Decision, MarketView, SYMBOLS, canonical_hash, validate_decision
 
 
 class RemoteError(RuntimeError):
@@ -78,7 +78,7 @@ class OpenAIDecider:
         "type": "object",
         "properties": {
             "action": {"type": "string", "enum": ["BUY", "SELL", "HOLD"]},
-            "symbol": {"type": "string", "enum": list(("BTCTMN", "ETHTMN", "SOLTMN"))},
+            "symbol": {"type": "string", "enum": list(SYMBOLS)},
             "reason": {"type": "string"},
             "confidence": {"type": "number"},
             "signal_ids": {"type": "array", "items": {"type": "string", "enum": ["momentum_3", "momentum_12", "volatility_12", "spread_bps", "volume_quote", "bid_quote_depth", "ask_quote_depth"]}},

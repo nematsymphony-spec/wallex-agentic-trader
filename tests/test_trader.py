@@ -59,6 +59,14 @@ class GuardrailTests(unittest.TestCase):
         p = Portfolio(RiskSettings())
         self.assertEqual(risk_check(AlwaysBuy().decide(v, False), v, p, p.settings, {v.symbol: v.bid})[1], "insufficient_two_sided_depth")
 
+    def test_position_scales_down_to_two_sided_depth(self):
+        v = view(symbol="PUMPTMN")
+        v = MarketView(v.symbol, v.timestamp, v.close, v.bid, v.ask, D(3_000_000), D(4_000_000), v.momentum_3, v.momentum_12, v.volatility_12, v.volume_quote, True, True)
+        p = Portfolio(RiskSettings())
+        intent, reason = risk_check(AlwaysBuy().decide(v, False), v, p, p.settings, {v.symbol: v.bid})
+        self.assertEqual(reason, "approved")
+        self.assertEqual(intent.notional_tmn, D(600_000))
+
 
 class AuditTests(unittest.TestCase):
     def test_backtest_fills_at_next_open(self):

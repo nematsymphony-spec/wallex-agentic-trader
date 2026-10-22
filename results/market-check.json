@@ -16,5 +16,11 @@
     "credit_allowed": true,
     "min_notional_tmn": 50000,
     "step_size": 5
+  },
+  "PUMPTMN": {
+    "spot_active": true,
+    "credit_allowed": true,
+    "min_notional_tmn": 50000,
+    "step_size": 1
   }
 }
