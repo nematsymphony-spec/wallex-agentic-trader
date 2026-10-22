@@ -10,7 +10,6 @@ from typing import Dict, List, Optional
 from zoneinfo import ZoneInfo
 
 
-SYMBOLS = ("BTCTMN", "ETHTMN", "SOLTMN", "PUMPTMN")
 D = Decimal
 
 
@@ -37,6 +36,7 @@ class MarketView:
     volume_quote: Decimal
     market_active: bool
     credit_allowed: bool
+    volatility_3d_12h: Decimal = D(0)
 
     @property
     def spread_bps(self) -> Decimal:
@@ -73,6 +73,7 @@ class RiskSettings:
     min_depth_multiple: Decimal = D(5)
     min_order_tmn: Decimal = D(100_000)
     target_position_fraction: Decimal = D("0.15")
+    min_quote_volume_24h: Decimal = D(50_000_000)
 
 
 @dataclass(frozen=True)
@@ -147,7 +148,7 @@ def validate_decision(raw: dict, view: MarketView, model: str, input_hash: str) 
         raise ValueError("invalid action or symbol")
     if not isinstance(raw["reason"], str) or not 8 <= len(raw["reason"]) <= 400:
         raise ValueError("invalid reason")
-    if not isinstance(raw["signal_ids"], list) or any(x not in ("momentum_3", "momentum_12", "volatility_12", "spread_bps", "volume_quote", "bid_quote_depth", "ask_quote_depth") for x in raw["signal_ids"]):
+    if not isinstance(raw["signal_ids"], list) or any(x not in ("momentum_3", "momentum_12", "volatility_12", "volatility_3d_12h", "spread_bps", "volume_quote", "bid_quote_depth", "ask_quote_depth") for x in raw["signal_ids"]):
         raise ValueError("invalid signals")
     confidence = D(str(raw["confidence"]))
     if not confidence.is_finite() or not D(0) <= confidence <= D(1):
@@ -158,11 +159,11 @@ def validate_decision(raw: dict, view: MarketView, model: str, input_hash: str) 
 def risk_check(decision: Decision, view: MarketView, portfolio: Portfolio, settings: RiskSettings, prices: Dict[str, Decimal]) -> tuple:
     if decision.action == "HOLD":
         return None, "hold"
-    if not view.market_active or not view.credit_allowed or view.symbol not in SYMBOLS:
+    if not view.market_active or not view.credit_allowed or not view.symbol.endswith("TMN"):
         return None, "market_not_allowed"
     if view.close <= 0 or view.bid <= 0 or view.ask <= view.bid or not math.isfinite(float(view.spread_bps)):
         return None, "bad_market_data"
-    if view.spread_bps > settings.max_spread_bps:
+    if decision.action == "BUY" and view.spread_bps > settings.max_spread_bps:
         return None, "spread_too_wide"
     if portfolio.total_stop and decision.action == "BUY":
         return None, "total_drawdown_stop"

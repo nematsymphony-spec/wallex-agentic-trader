@@ -7,9 +7,10 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from decimal import Decimal
+from pathlib import Path
 from typing import Any, Dict, List
 
-from .core import Decision, MarketView, SYMBOLS, canonical_hash, validate_decision
+from .core import Decision, MarketView, canonical_hash, validate_decision
 
 
 class RemoteError(RuntimeError):
@@ -50,7 +51,19 @@ class WallexPublic:
         result = self.get(f"/v1/prop/packages/{int(package_id)}")["result"]
         if not isinstance(result.get("unavailableMarkets"), list) or int(result.get("detail", {}).get("id", -1)) != package_id:
             raise RemoteError("invalid package market response")
-        return set(result["unavailableMarkets"])
+        unavailable = set(result["unavailableMarkets"])
+        if package_id == 183:
+            # The user's package-183 exclusion list is a floor: an incomplete API
+            # response must never make a previously forbidden market tradable.
+            path = Path(__file__).resolve().parents[2] / "config" / "package-183-exclusions.json"
+            try:
+                snapshot = json.loads(path.read_text())
+                if snapshot.get("package_id") != 183 or not isinstance(snapshot.get("unavailable_markets"), list):
+                    raise ValueError("invalid local exclusions")
+                unavailable.update(snapshot["unavailable_markets"])
+            except (OSError, ValueError) as exc:
+                raise RemoteError("package-183 exclusion snapshot unavailable") from exc
+        return unavailable
 
     def depth(self, symbol: str) -> dict:
         result = self.get("/v1/depth", {"symbol": symbol})["result"]
@@ -78,10 +91,10 @@ class OpenAIDecider:
         "type": "object",
         "properties": {
             "action": {"type": "string", "enum": ["BUY", "SELL", "HOLD"]},
-            "symbol": {"type": "string", "enum": list(SYMBOLS)},
+            "symbol": {"type": "string"},
             "reason": {"type": "string"},
             "confidence": {"type": "number"},
-            "signal_ids": {"type": "array", "items": {"type": "string", "enum": ["momentum_3", "momentum_12", "volatility_12", "spread_bps", "volume_quote", "bid_quote_depth", "ask_quote_depth"]}},
+            "signal_ids": {"type": "array", "items": {"type": "string", "enum": ["momentum_3", "momentum_12", "volatility_12", "volatility_3d_12h", "spread_bps", "volume_quote", "bid_quote_depth", "ask_quote_depth"]}},
         },
         "required": ["action", "symbol", "reason", "confidence", "signal_ids"],
         "additionalProperties": False,

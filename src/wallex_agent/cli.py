@@ -9,8 +9,9 @@ from datetime import datetime, timezone
 from decimal import Decimal
 
 from .clients import WallexPublic
-from .core import SYMBOLS
-from .engine import AuditLog, run_backtest, run_shadow
+from .core import RiskSettings
+from .engine import AuditLog, collect_live_views, run_backtest, run_shadow
+from .selector import rank_views
 
 
 def epoch(value: str) -> int:
@@ -25,6 +26,9 @@ def main(argv=None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     markets = sub.add_parser("markets", help="Check live spot status and credit package exclusion list")
     markets.add_argument("--package-id", type=int, default=183)
+    scan = sub.add_parser("scan", help="Rank all eligible TMN spot markets without AI or orders")
+    scan.add_argument("--package-id", type=int, default=183)
+    scan.add_argument("--top", type=int, default=10)
     backtest = sub.add_parser("backtest", help="Run historical simulation on completed hourly bars")
     backtest.add_argument("--start", type=epoch, required=True)
     backtest.add_argument("--end", type=epoch, required=True)
@@ -50,8 +54,14 @@ def main(argv=None) -> int:
         if args.command == "markets":
             api = WallexPublic()
             info, unavailable = api.markets(), api.unavailable(args.package_id)
-            output = {s: {"spot_active": info.get(s, {}).get("spot_active", False), "credit_allowed": s not in unavailable, "min_notional_tmn": info.get(s, {}).get("minNotional"), "step_size": info.get(s, {}).get("stepSize")} for s in SYMBOLS}
+            output = {"package_id": args.package_id, "tmn": sorted(s for s, v in info.items() if v.get("quoteAsset") == "TMN" and v.get("spot_active") and s not in unavailable), "usdt": sorted(s for s, v in info.items() if v.get("quoteAsset") == "USDT" and v.get("spot_active") and s not in unavailable)}
+            output["counts"] = {"tmn": len(output["tmn"]), "usdt": len(output["usdt"])}
             print(json.dumps(output, indent=2, ensure_ascii=False))
+        elif args.command == "scan":
+            views, catalog = collect_live_views(WallexPublic(), args.package_id)
+            ranked, reasons = rank_views(views, RiskSettings(), catalog["last_complete_hour"])
+            counts = {reason: list(reasons.values()).count(reason) for reason in sorted(set(reasons.values()))}
+            print(json.dumps({"last_complete_hour": catalog["last_complete_hour"], "allowed_tmn": len(catalog["allowed_tmn"]), "allowed_usdt_cataloged": len(catalog["allowed_usdt"]), "scanned": len(views), "fetch_errors": catalog["errors"], "gate_counts": counts, "top": ranked[:max(args.top, 0)]}, indent=2, ensure_ascii=False, default=str))
         elif args.command == "backtest":
             print(json.dumps(run_backtest(args.db, args.start, args.end, args.model, args.spread_bps, args.package_id), indent=2, ensure_ascii=False))
         elif args.command == "shadow":

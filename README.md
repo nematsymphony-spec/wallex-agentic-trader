@@ -1,6 +1,6 @@
 # Starcoach × Wallex agentic trading challenge
 
-Auditable Python prototype for the **BTCTMN, ETHTMN, SOLTMN, PUMPTMN** credit-account challenge. It collects completed hourly candles and current order books, obtains a structured OpenAI `BUY / SELL / HOLD` decision, applies deterministic risk limits, and records a hash-linked audit trail. The same `Engine.step` handles historical simulation and shadow mode.
+Auditable Python prototype for the Wallex credit-account challenge. It discovers **every active, package-allowed TMN spot market at runtime**, collects completed hourly candles and current order books, asks OpenAI to choose one market or `HOLD` from all eligible markets in one structured decision, applies deterministic risk limits, and records a hash-linked audit trail. The same `Engine.cycle` and `Engine.step` handle historical simulation and shadow mode. USDT markets are catalogued but excluded from trading decisions while the credit balance is TMN.
 
 **Status: no real exchange order can be sent from this revision.** Wallex's published [spot order endpoint](https://developers.wallex.ir/docs/spot-create-order) does not document a credit-subaccount routing parameter. The account's API management page also currently requires an advanced verification level before an API key can be created. `wallex-agent live` exits with code 3. These are release blockers, recorded in [implementation status](docs/IMPLEMENTATION_STATUS.md).
 
@@ -10,6 +10,7 @@ Python 3.9+; standard library only. From this directory:
 
 ```sh
 PYTHONPATH=src python3 -m wallex_agent markets
+PYTHONPATH=src python3 -m wallex_agent scan --top 15
 PYTHONPATH=src python3 -m wallex_agent backtest \
   --start 2026-10-18T00:00:00Z --end 2026-10-21T00:00:00Z \
   --model rule --db results/new-backtest.db > results/new-backtest.json
@@ -25,17 +26,18 @@ For an always-on Linux shadow process, adapt [`deploy/wallex-shadow.service`](de
 
 ## Decision path
 
-1. Read Wallex's [active markets](https://developers.wallex.ir/docs/basic-services-markets), [package exclusions](https://developers.wallex.ir/docs/trade-credit-package-details), completed [historical candles](https://developers.wallex.ir/docs/generated/candle-history), and [order book](https://developers.wallex.ir/docs/basic-services-depth). Reject stale or invalid data.
-2. Calculate three-hour and twelve-hour momentum, twelve-hour volatility, current spread, and top-five-level bid/ask depth. The AI may select or reject a trade and must name the signals used.
-3. Reject markets outside the four-symbol candidate list or package permissions; check spread (35 bps max), five-times intended-order depth **on both sides of the book**, and capital limits. A buy targets 15% of equity, scales down when depth is thin, and is capped at 20% per position, with at most two open positions.
-4. Pause buys after 2% daily drawdown (Tehran day) and after equity reaches 95% of the starting 5,000,000 TMN. Sells that reduce an existing position remain possible. A price gap can breach these thresholds before a response; the limits are controls, not guarantees.
-5. Record snapshot → model decision → risk outcome → order intent → simulated fill as hash-linked SQLite events, with an idempotent client order ID. The log omits API secrets. Use `verify-log` to detect accidental edits or corruption.
+1. Read Wallex's [active markets](https://developers.wallex.ir/docs/basic-services-markets), [package exclusions](https://developers.wallex.ir/docs/trade-credit-package-details), completed [historical candles](https://developers.wallex.ir/docs/generated/candle-history), and [order book](https://developers.wallex.ir/docs/basic-services-depth). Union the live exclusion list with the [357-market package-183 safety snapshot](config/package-183-exclusions.json) corresponding to the user's forbidden-market list. Discover the full allowed TMN universe each cycle; reject stale or invalid data.
+2. From 73 consecutive completed hourly closes, calculate six non-overlapping 12-hour realized-volatility windows as the square root of summed squared hourly percentage returns. Average each adjacent pair into a day, then weight the newest, middle, and oldest days 50%, 30%, and 20%. Also calculate three-hour and twelve-hour momentum, twelve-hour volatility, trailing 24-hour quote volume, current spread, and top-five bid/ask quote depth.
+3. Admit a market only if its data is fresh, spread is at most 35 bps, **each side** of the book has at least five times the minimum 100,000 TMN order, and 24-hour quote volume is at least 50 million TMN. Rank admitted markets with a bounded volatility percentile bonus (25%), trend (35%), volume (20%), and spread cost (20%). This is a priority score, not a return forecast. Send **all** eligible markets and held positions together to one AI call; it may choose one `BUY`, one `SELL`, or `HOLD` and must name its signals.
+4. Apply an independent risk veto. A buy targets 15% of equity, scales down when depth is thin, and is capped at 20% per position, with at most two open positions.
+5. Pause buys after 2% daily drawdown (Tehran day) and after equity reaches 95% of the starting 5,000,000 TMN. Sells that reduce an existing position remain possible. A price gap can breach these thresholds before a response; the limits are controls, not guarantees.
+6. Record full-universe scan → model decision → risk outcome → order intent → simulated fill as hash-linked SQLite events, with an idempotent client order ID. The log omits API secrets. Use `verify-log` to detect accidental edits or corruption.
 
 ## Evaluation
 
 `backtest` uses completed one-hour bars for features and fills at the **next** bar's opening price with assumed bid/ask spread and 0.3% taker fee per side. Historical depth is unavailable, so the depth assumption is stated in each report. `--model rule` is only an engineering baseline and **does not demonstrate AI performance**. `--model openai` calls the same AI decider as shadow mode, but consumes API calls. Shadow mode uses live public market data and simulated fills; its portfolio is persisted between cycles in the SQLite state table. No shadow result should be presented as a real Wallex account result.
 
-Sample reports: [four-market baseline](results/baseline-four-markets.json), [original three-market baseline](results/baseline-final.json), [shadow without an OpenAI key](results/shadow-openai.json), and [result notes](docs/RESULTS.md). [Market-selection notes](docs/MARKET_SELECTION.md) explain why PUMP/TMN is a candidate and why spot eligibility alone is insufficient.
+Current reports: [full-universe baseline](results/full-universe-baseline-current.json), [full-universe scan](results/full-universe-scan-current.json), [shadow without an OpenAI key](results/full-universe-shadow-current.json), and [result notes](docs/RESULTS.md). [Market-selection notes](docs/MARKET_SELECTION.md) explain the dynamic universe and why high volatility alone is insufficient. Earlier three- and four-market reports used a different per-market decision flow and are retained only as historical prototypes.
 
 ## Runbook before a real release
 

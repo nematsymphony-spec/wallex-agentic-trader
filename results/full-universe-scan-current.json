@@ -1,0 +1,181 @@
+{
+  "last_complete_hour": 1792663200,
+  "allowed_tmn": 62,
+  "allowed_usdt_cataloged": 58,
+  "scanned": 30,
+  "fetch_errors": {
+    "1INCHTMN": "insufficient continuous candles",
+    "AAVETMN": "insufficient continuous candles",
+    "AGLDTMN": "insufficient continuous candles",
+    "AXSTMN": "insufficient continuous candles",
+    "ATOMTMN": "insufficient continuous candles",
+    "AVAXTMN": "insufficient continuous candles",
+    "CHZTMN": "insufficient continuous candles",
+    "COOKIETMN": "insufficient continuous candles",
+    "CAKETMN": "insufficient continuous candles",
+    "EGLDTMN": "insufficient continuous candles",
+    "ENATMN": "insufficient continuous candles",
+    "DYDXTMN": "insufficient continuous candles",
+    "EIGENTMN": "insufficient continuous candles",
+    "ELONTMN": "insufficient continuous candles",
+    "ENJTMN": "insufficient continuous candles",
+    "ETCTMN": "insufficient continuous candles",
+    "FLOKITMN": "insufficient continuous candles",
+    "FORMTMN": "insufficient continuous candles",
+    "IMXTMN": "insufficient continuous candles",
+    "LINKTMN": "insufficient continuous candles",
+    "MOGTMN": "insufficient continuous candles",
+    "PEOPLETMN": "insufficient continuous candles",
+    "MANATMN": "insufficient continuous candles",
+    "PENGUTMN": "insufficient continuous candles",
+    "SLVONTMN": "insufficient continuous candles",
+    "SEITMN": "insufficient continuous candles",
+    "TNSRTMN": "insufficient continuous candles",
+    "SUSHITMN": "insufficient continuous candles",
+    "USDCTMN": "insufficient continuous candles",
+    "USDTTMN": "insufficient continuous candles",
+    "XLMTMN": "insufficient continuous candles",
+    "YFITMN": "insufficient continuous candles"
+  },
+  "gate_counts": {
+    "eligible": 15,
+    "wide_spread": 15
+  },
+  "top": [
+    {
+      "symbol": "USOONTMN",
+      "score": "0.7358264442044488855654903212",
+      "volatility_rank": "0.6666666666666666666666666667",
+      "trend_rank": "1",
+      "volume_rank": "0.7333333333333333333333333333",
+      "cost_score": "0.3624655543555777611607849389",
+      "volatility_3d_12h": "0.02368885713111523963217719966"
+    },
+    {
+      "symbol": "PEPETMN",
+      "score": "0.7286125388236173481330241214",
+      "volatility_rank": "0.8666666666666666666666666667",
+      "trend_rank": "0.3333333333333333333333333333",
+      "volume_rank": "1",
+      "cost_score": "0.9763960274514200739984539398",
+      "volatility_3d_12h": "0.02963251577533550418167237082"
+    },
+    {
+      "symbol": "BTCTMN",
+      "score": "0.6664022321060170516957325032",
+      "volatility_rank": "0.1333333333333333333333333333",
+      "trend_rank": "0.7333333333333333333333333333",
+      "volume_rank": "0.9333333333333333333333333333",
+      "cost_score": "0.9486778271967519251453291825",
+      "volatility_3d_12h": "0.01407991981601334122368296062"
+    },
+    {
+      "symbol": "PUMPTMN",
+      "score": "0.6025238647023119792528830767",
+      "volatility_rank": "1",
+      "trend_rank": "0.06666666666666666666666666667",
+      "volume_rank": "0.8666666666666666666666666667",
+      "cost_score": "0.7792859901782265629310820504",
+      "volatility_3d_12h": "0.04263716573729022571228297128"
+    },
+    {
+      "symbol": "BNBTMN",
+      "score": "0.5026784104599626224409352049",
+      "volatility_rank": "0.2666666666666666666666666667",
+      "trend_rank": "0.8",
+      "volume_rank": "0.6666666666666666666666666667",
+      "cost_score": "0.1133920522998131122046760243",
+      "volatility_3d_12h": "0.01732439130167229533301556351"
+    },
+    {
+      "symbol": "XAUTTMN",
+      "score": "0.5007521832520887050490098112",
+      "volatility_rank": "0.06666666666666666666666666667",
+      "trend_rank": "0.8666666666666666666666666667",
+      "volume_rank": "0.4666666666666666666666666667",
+      "cost_score": "0.4370942495937768585783823897",
+      "volatility_3d_12h": "0.01291826062884669208611985534"
+    },
+    {
+      "symbol": "TRXTMN",
+      "score": "0.4923063683304647160068846816",
+      "volatility_rank": "0.2",
+      "trend_rank": "0.9333333333333333333333333333",
+      "volume_rank": "0.2666666666666666666666666667",
+      "cost_score": "0.311531841652323580034423408",
+      "volatility_3d_12h": "0.01646792727327876274629617679"
+    },
+    {
+      "symbol": "XRPTMN",
+      "score": "0.4853948588741916151844945849",
+      "volatility_rank": "0.5333333333333333333333333333",
+      "trend_rank": "0.5333333333333333333333333333",
+      "volume_rank": "0.5333333333333333333333333333",
+      "cost_score": "0.2936409610376247425891395909",
+      "volatility_3d_12h": "0.02161633216465777288127349997"
+    },
+    {
+      "symbol": "HBARTMN",
+      "score": "0.4771257351015969345462170175",
+      "volatility_rank": "0.6",
+      "trend_rank": "0.4666666666666666666666666667",
+      "volume_rank": "0.06666666666666666666666666667",
+      "cost_score": "0.7522953421746513393977517543",
+      "volatility_3d_12h": "0.02329656740332163314413364319"
+    },
+    {
+      "symbol": "SOLTMN",
+      "score": "0.4749525440353733117837657822",
+      "volatility_rank": "0.4666666666666666666666666667",
+      "trend_rank": "0.6",
+      "volume_rank": "0.4",
+      "cost_score": "0.3414293868435332255854955774",
+      "volatility_3d_12h": "0.02095842052898171771299226491"
+    },
+    {
+      "symbol": "HYPETMN",
+      "score": "0.4642394304656508401890753311",
+      "volatility_rank": "0.8",
+      "trend_rank": "0.6666666666666666666666666667",
+      "volume_rank": "0.1333333333333333333333333333",
+      "cost_score": "0.0211971523282542009453766554",
+      "volatility_3d_12h": "0.02532215516908500555084242563"
+    },
+    {
+      "symbol": "STMN",
+      "score": "0.4464392584362590989033984186",
+      "volatility_rank": "0.9333333333333333333333333333",
+      "trend_rank": "0.2",
+      "volume_rank": "0.3333333333333333333333333333",
+      "cost_score": "0.3821962921812954945169920931",
+      "volatility_3d_12h": "0.03388067669915360116511457996"
+    },
+    {
+      "symbol": "DOGETMN",
+      "score": "0.4095799206109036412348873067",
+      "volatility_rank": "0.4",
+      "trend_rank": "0.2666666666666666666666666667",
+      "volume_rank": "0.6",
+      "cost_score": "0.4812329363878515395077698669",
+      "volatility_3d_12h": "0.01891375790312514531423125345"
+    },
+    {
+      "symbol": "ETHTMN",
+      "score": "0.4054139666835167077162032342",
+      "volatility_rank": "0.3333333333333333333333333333",
+      "trend_rank": "0.4",
+      "volume_rank": "0.8",
+      "cost_score": "0.1104031667509168719143495046",
+      "volatility_3d_12h": "0.01744500137510001997727393958"
+    },
+    {
+      "symbol": "ADATMN",
+      "score": "0.3180178796800147141925405336",
+      "volatility_rank": "0.7333333333333333333333333333",
+      "trend_rank": "0.1333333333333333333333333333",
+      "volume_rank": "0.2",
+      "cost_score": "0.240089398400073570962702668",
+      "volatility_3d_12h": "0.02472653181299834580136393766"
+    }
+  ]
+}
