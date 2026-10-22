@@ -1,0 +1,42 @@
+[
+  {
+    "name": "base_30bps_fee_each_side_20bps_spread",
+    "fee_each_side": "0.003",
+    "spread_bps": "20",
+    "net_return_pct": "-2.563389781159482540862957180",
+    "net_pnl_tmn": "-128169.489057974127043147859",
+    "trades": 26,
+    "wins": 9,
+    "max_drawdown_pct": "2.867214051213896450653336748"
+  },
+  {
+    "name": "fee_20bps_each_side_20bps_spread",
+    "fee_each_side": "0.002",
+    "spread_bps": "20",
+    "net_return_pct": "-1.799442323978854434134680720",
+    "net_pnl_tmn": "-89972.116198942721706734036",
+    "trades": 26,
+    "wins": 9,
+    "max_drawdown_pct": "2.252495691987119264621244118"
+  },
+  {
+    "name": "no_fee_20bps_spread",
+    "fee_each_side": "0",
+    "spread_bps": "20",
+    "net_return_pct": "-0.254666971566016737195983500",
+    "net_pnl_tmn": "-12733.348578300836859799175",
+    "trades": 26,
+    "wins": 9,
+    "max_drawdown_pct": "1.333440101031735661150814290"
+  },
+  {
+    "name": "near_zero_execution_cost",
+    "fee_each_side": "0",
+    "spread_bps": "0.000001",
+    "net_return_pct": "0.429932821555122799858146600",
+    "net_pnl_tmn": "21496.641077756139992907330",
+    "trades": 26,
+    "wins": 9,
+    "max_drawdown_pct": "1.202204996216840566194103042"
+  }
+]

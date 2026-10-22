@@ -39,6 +39,8 @@ For an always-on Linux shadow process, adapt [`deploy/wallex-shadow.service`](de
 
 Current reports: [full-universe baseline](results/full-universe-baseline-current.json), [full-universe scan](results/full-universe-scan-current.json), [shadow without an OpenAI key](results/full-universe-shadow-current.json), and [result notes](docs/RESULTS.md). [Market-selection notes](docs/MARKET_SELECTION.md) explain the dynamic universe and why high volatility alone is insufficient. Earlier three- and four-market reports used a different per-market decision flow and are retained only as historical prototypes.
 
+A separate, predeclared [72-hour trend-breakout experiment](docs/TREND_72H_RESULT.md) uses the latest completed public Wallex hourly bars, a six-hour maximum hold and the same fee/spread scenario. It returned **−2.5634%** after assumed costs on 2026-10-19 to 2026-10-22. The saved raw candles and script reproduce this exploratory result; no AI model or exchange order was involved.
+
 ## Runbook before a real release
 
 See [implementation status](docs/IMPLEMENTATION_STATUS.md). A real-trading adapter must be added **only** after Wallex confirms a credit-only order route and a read-only account identity/balance check. Verify that the API key is scoped to the correct subaccount, and test order status, partial fills, cancellation, exchange min quantity, precision, stale-book handling, API interruption, and restart reconciliation. Use one process and one persistent SQLite database on an always-on server. Store secrets outside the repository. Freeze and hash the exact tested commit before submitting; deploy that same commit only.
