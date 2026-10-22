@@ -1,0 +1,104 @@
+{
+  "source": "historical rule baseline; simulated fill, not a Wallex execution",
+  "events": [
+    {
+      "id": 43,
+      "at": "2026-10-22T10:49:07.249626+00:00",
+      "kind": "market_snapshot",
+      "symbol": "SOLTMN",
+      "payload": {
+        "ask": "27694976.309",
+        "ask_quote_depth": "5000000",
+        "bid": "27639641.691",
+        "bid_quote_depth": "5000000",
+        "close": "27667309",
+        "credit_allowed": true,
+        "market_active": true,
+        "momentum_12": "0.012627488823505578612222830",
+        "momentum_3": "0.016149422503247532035417445",
+        "symbol": "SOLTMN",
+        "timestamp": 1792292400,
+        "volatility_12": "0.006940847696387772770941518876",
+        "volume_quote": "6726341625.77630"
+      },
+      "prev_hash": "512d139747df54edc215f814716a89a69a5296943db7f259dcca7f44fbcf07b8",
+      "event_hash": "9de58ea36521a2b76fad51fd48f97ac68d08cad10e4c1635168c1ac10fd4ae9d"
+    },
+    {
+      "id": 44,
+      "at": "2026-10-22T10:49:07.250177+00:00",
+      "kind": "decision",
+      "symbol": "SOLTMN",
+      "payload": {
+        "decision": {
+          "action": "BUY",
+          "confidence": "0.5",
+          "input_hash": "172b3d696ca4ef17810a83fb2632aa242476a84a3cff943fa45ea8473df91330",
+          "model": "rule-baseline",
+          "reason": "Deterministic baseline from completed candles",
+          "signal_ids": [
+            "momentum_3",
+            "momentum_12",
+            "volatility_12"
+          ],
+          "symbol": "SOLTMN"
+        },
+        "snapshot_hash": "9de58ea36521a2b76fad51fd48f97ac68d08cad10e4c1635168c1ac10fd4ae9d"
+      },
+      "prev_hash": "9de58ea36521a2b76fad51fd48f97ac68d08cad10e4c1635168c1ac10fd4ae9d",
+      "event_hash": "c89fa91aecca2594d9b7c7cfd160d7bbba00f0571c4e8d77bc937ef17f36aaec"
+    },
+    {
+      "id": 45,
+      "at": "2026-10-22T10:49:07.250757+00:00",
+      "kind": "risk",
+      "symbol": "SOLTMN",
+      "payload": {
+        "approved": true,
+        "daily_stop": false,
+        "decision_event": "c89fa91aecca2594d9b7c7cfd160d7bbba00f0571c4e8d77bc937ef17f36aaec",
+        "equity_tmn": "5000000",
+        "reason": "approved",
+        "total_stop": false
+      },
+      "prev_hash": "c89fa91aecca2594d9b7c7cfd160d7bbba00f0571c4e8d77bc937ef17f36aaec",
+      "event_hash": "1dd8be3d730f106cac48f94d2d704826204c1fd841e0c2aa2400dbd1c4b382a9"
+    },
+    {
+      "id": 46,
+      "at": "2026-10-22T10:49:07.251913+00:00",
+      "kind": "order_intent",
+      "symbol": "SOLTMN",
+      "payload": {
+        "decision_event": "c89fa91aecca2594d9b7c7cfd160d7bbba00f0571c4e8d77bc937ef17f36aaec",
+        "intent": {
+          "client_id": "sc-e19edbb3c04f6b1fc1a900fc",
+          "decision_hash": "fead3f05cac39c7b9c9528d6fb26e78ce862e552babe2c8fbc14d961a4e343c6",
+          "limit_price": "27694976.309",
+          "notional_tmn": "750000.00",
+          "quantity": "0.02708072365298516204627095281",
+          "side": "BUY",
+          "symbol": "SOLTMN"
+        },
+        "mode": "backtest"
+      },
+      "prev_hash": "1dd8be3d730f106cac48f94d2d704826204c1fd841e0c2aa2400dbd1c4b382a9",
+      "event_hash": "839183e8fff87622558379f6aba6b21b2e48342bced3832d3008ac657325c625"
+    },
+    {
+      "id": 47,
+      "at": "2026-10-22T10:49:07.253025+00:00",
+      "kind": "fill",
+      "symbol": "SOLTMN",
+      "payload": {
+        "client_id": "sc-e19edbb3c04f6b1fc1a900fc",
+        "fee_tmn": "2250.000000000000000000000000",
+        "model": "synthetic next-open",
+        "price": "27694976.309",
+        "quantity": "0.02708072365298516204627095281"
+      },
+      "prev_hash": "839183e8fff87622558379f6aba6b21b2e48342bced3832d3008ac657325c625",
+      "event_hash": "3a9e6bc4360e31b5d38b755822ba06db4a93d65927df1549992efff13a06b4c7"
+    }
+  ]
+}

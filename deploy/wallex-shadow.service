@@ -1,0 +1,22 @@
+[Unit]
+Description=Wallex challenge shadow trader (no exchange orders)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wallex-agent
+WorkingDirectory=/opt/wallex-agentic-trader
+EnvironmentFile=/etc/wallex-agent/shadow.env
+ExecStart=/usr/bin/python3 -m wallex_agent shadow --model openai --forever --interval 3600 --db /var/lib/wallex-agent/shadow.db
+Environment=PYTHONPATH=/opt/wallex-agentic-trader/src
+Restart=on-failure
+RestartSec=60
+StateDirectory=wallex-agent
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

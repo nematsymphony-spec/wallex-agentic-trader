@@ -1,0 +1,20 @@
+{
+  "BTCTMN": {
+    "spot_active": true,
+    "credit_allowed": true,
+    "min_notional_tmn": 50000,
+    "step_size": 8
+  },
+  "ETHTMN": {
+    "spot_active": true,
+    "credit_allowed": true,
+    "min_notional_tmn": 50000,
+    "step_size": 5
+  },
+  "SOLTMN": {
+    "spot_active": true,
+    "credit_allowed": true,
+    "min_notional_tmn": 50000,
+    "step_size": 5
+  }
+}
