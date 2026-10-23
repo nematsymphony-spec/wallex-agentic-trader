@@ -1,8 +1,8 @@
 {
-  "frozen_at_utc": "2026-10-23T19:47:50.528358+00:00",
+  "frozen_at_utc": "2026-10-23T19:52:34.847252+00:00",
   "files": {
     ".gitignore": "c03a6f9dc6771a3d8dc4e92ccf10163019b7399139c828df9c2238be6d9d9ce7",
-    "README.md": "24447806a96caa0731c354023eb71d8ef48f54e4d8386b9b792803010d555d5c",
+    "README.md": "53b0b280ada502b2ce9afcbc95fb21b015f5a941fee1514d940c21d80c896072",
     "config/credit-competition-ai.json": "e1b442620db18e9251408199eb74367d51c5383eeb036d136a5bcdfeb922cd28",
     "config/credit-research.json": "af7969ef63751c06be96c7cb7a2ea083111e5c081bd1295ec4c6a2c29cb1c2b9",
     "config/package-183-exclusions.json": "8772d0c41f5ba9f46df3cd11416e304095c98a1fd304d4188855f759d24a3263",
@@ -29,6 +29,7 @@
     "docs/TWO_MINUTE_EXECUTION.md": "ce1bb3042c422083c22bc720609a8a521a4ba000f760785a4551c64e5253a878",
     "docs/VERIFIED_ACCOUNT_FEES.md": "0be314feab6290a12cc4f5c564fb87457ac5efcd26d59ecf493a27779a2c5a5a",
     "experiments/build_rd_report.py": "37c626a3bb54250eb0206ed1a2d7ac3ae27d35d96845fcf75446695898f07cb9",
+    "experiments/compare_buy_hold.py": "b013d8ff675eacac9f1928c97977f55135b7790a29d319ee20b39ab8e11514b2",
     "experiments/cross_venue_leadlag.py": "ed831371c766840bee43da71bc2869dab9ad168b4d49fe5779bda291d6ff4717",
     "experiments/execution_aligned_two_minute_model.py": "baa210fe355d1ab822c56eba51f9fe1648aedfd0aa3c3047c31d0202850d1a54",
     "experiments/hourly_two_coins.py": "dbf9ed7c9e384e377a4b79d9c8e08af7f03c540e94ae547aff53c64e4b95aa26",
