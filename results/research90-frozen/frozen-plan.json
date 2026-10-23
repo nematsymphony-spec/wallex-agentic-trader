@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-10-23T13:51:55.466224+00:00",
+  "configs": {
+    "3": {
+      "id": "frozen-relative-strength-goal3",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.03
+    },
+    "5": {
+      "id": "frozen-relative-strength-goal5",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.05
+    }
+  },
+  "windows_days": [
+    30,
+    60,
+    90
+  ],
+  "end": 1792713600,
+  "initial_tmn": 5000000,
+  "profit_goal_reset": "none within each independent period; cash after goal until period end",
+  "costs": "0.3% taker each side + assumed full spread 20bps",
+  "risk": "same 2% Tehran-day buy pause and 5% initial-equity halt, hourly review",
+  "parameter_search": false,
+  "universe": "same frozen currently allowed 62 TMN spot markets",
+  "limitations": "same historical screen proxy; no historical depth or exact quote turnover"
+}

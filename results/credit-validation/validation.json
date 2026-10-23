@@ -1,0 +1,84 @@
+{
+  "recorded_at_utc": "2026-10-23T15:48:01.343866+00:00",
+  "recorded_at_tehran": "2026-10-23T19:18:01.345374+03:30",
+  "unit_tests": {
+    "production_and_legacy": 29,
+    "research": 19,
+    "all_passed": true
+  },
+  "policy_replay": {
+    "runs": 36,
+    "all_original_returns_drawdowns_fees_trade_counts_reproduced": true,
+    "tolerance": 1e-07,
+    "new_grid_search": false
+  },
+  "public_data_paper": {
+    "rule": {
+      "events": 5,
+      "cycles": [
+        {
+          "action": "HOLD",
+          "missing_references": [
+            "USDTTMN"
+          ],
+          "reason": "reference data incomplete",
+          "snapshot": "bb1da5c3d89f5131468ab2aeaf5d48a30a8b720014e2e0adb3d39d524da04fc4"
+        },
+        {
+          "action": "HOLD",
+          "reason": "wait next completed hour"
+        },
+        {
+          "action": "HOLD",
+          "reason": "wait next completed hour"
+        }
+      ],
+      "audit_chain_valid": true,
+      "allowed_count": 62,
+      "screen_count": 40,
+      "missing_references": [
+        "USDTTMN"
+      ],
+      "actual_exchange_orders": 0,
+      "actual_model_calls": 0
+    },
+    "ai": {
+      "events": 5,
+      "cycles": [
+        {
+          "action": "HOLD",
+          "missing_references": [
+            "USDTTMN"
+          ],
+          "reason": "reference data incomplete",
+          "snapshot": "4023c2739cbacb3cec21e7b5c8f9b866832f05084f8597ba15878b64b53b0277"
+        },
+        {
+          "action": "HOLD",
+          "reason": "wait next completed hour"
+        },
+        {
+          "action": "HOLD",
+          "reason": "wait next completed hour"
+        }
+      ],
+      "audit_chain_valid": true,
+      "allowed_count": 62,
+      "screen_count": 38,
+      "missing_references": [
+        "USDTTMN"
+      ],
+      "actual_exchange_orders": 0,
+      "actual_model_calls": 0
+    }
+  },
+  "previous_shadow": "Preserved original outputs: HOLD without OpenAI key; not profitable-execution evidence",
+  "private_api_verified": false,
+  "real_orders_sent": false,
+  "limitations": [
+    "Short smoke tests only; no continuous multi-day shadow evidence",
+    "USDTTMN reference missing hourly bars; fail-closed HOLD",
+    "No real OpenAI model call in these runs",
+    "Mock server exercises auth and order lifecycle; not exchange sandbox validation"
+  ]
+}

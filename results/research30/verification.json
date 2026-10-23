@@ -1,0 +1,8 @@
+{
+  "unit_tests_passed": 6,
+  "competition_universe_no_exclusions": true,
+  "primary_positive_minute_coverage_complete": true,
+  "positive_trades_from_day_top5": true,
+  "cash_accounting_reconciled": true,
+  "scenario_count": 867
+}

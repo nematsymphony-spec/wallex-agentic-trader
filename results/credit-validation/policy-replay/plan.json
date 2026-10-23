@@ -1,0 +1,105 @@
+{
+  "created_at_utc": "2026-10-23T15:35:08.977319+00:00",
+  "configs": {
+    "goal3-whole": {
+      "id": "monthly-goal3-whole",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.03,
+      "goal_reset_hours": 720,
+      "portfolio_loss_reset": "whole",
+      "rank_without_entry_volume": true
+    },
+    "goal3-block": {
+      "id": "monthly-goal3-block",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.03,
+      "goal_reset_hours": 720,
+      "portfolio_loss_reset": "block",
+      "rank_without_entry_volume": true
+    },
+    "goal3-off": {
+      "id": "monthly-goal3-off",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.03,
+      "goal_reset_hours": 720,
+      "portfolio_loss_reset": "off",
+      "rank_without_entry_volume": true
+    },
+    "goal5-whole": {
+      "id": "monthly-goal5-whole",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.05,
+      "goal_reset_hours": 720,
+      "portfolio_loss_reset": "whole",
+      "rank_without_entry_volume": true
+    },
+    "goal5-block": {
+      "id": "monthly-goal5-block",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.05,
+      "goal_reset_hours": 720,
+      "portfolio_loss_reset": "block",
+      "rank_without_entry_volume": true
+    },
+    "goal5-off": {
+      "id": "monthly-goal5-off",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.05,
+      "goal_reset_hours": 720,
+      "portfolio_loss_reset": "off",
+      "rank_without_entry_volume": true
+    }
+  },
+  "periods_days": [
+    30,
+    60,
+    90
+  ],
+  "monthly_definition": "successive 30-day blocks anchored at each experiment start, not calendar months",
+  "goal_reference": "net liquidation equity at block start; no deposits or withdrawals",
+  "carry_positions": "no forced boundary liquidation; entry price stop and 48h age preserved",
+  "portfolio_stop_modes": {
+    "whole": "5% against original initial equity; persistent across all blocks",
+    "block": "5% against block opening equity, reset at block boundary",
+    "off": "no account-level 5% stop; 5% position stop and 2% daily new-buy pause retained"
+  },
+  "costs": "0.3% each side plus assumed 20bps full spread; same frozen selection/entry rules",
+  "data": "same 62 current permitted TMN spot markets; historical ranking proxy remains",
+  "new_parameter_search": false
+}

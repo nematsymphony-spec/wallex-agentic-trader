@@ -1,0 +1,10 @@
+{
+  "parameter_search": false,
+  "frozen_original_rules": true,
+  "goals_not_reset_within_period": true,
+  "30d_exact_reproduction": true,
+  "minute_coverage_complete": true,
+  "two_minute_paths_same_results": true,
+  "cash_pnl_reconciled": true,
+  "past_data_ranking_first_choice_fill_audit_identical_all_6_runs": true
+}

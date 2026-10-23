@@ -1,56 +1,158 @@
-# Starcoach × Wallex agentic trading challenge
+# Starcoach × Wallex — تحقیق و ربات معاملهٔ حساب اعتباری
 
-Auditable Python prototype for the Wallex credit-account challenge. It discovers **every active, package-allowed TMN spot market at runtime**, collects completed hourly candles and current order books, asks OpenAI to choose one market or `HOLD` from all eligible markets in one structured decision, applies deterministic risk limits, and records a hash-linked audit trail. The same `Engine.cycle` and `Engine.step` handle historical simulation and shadow mode. USDT markets are catalogued but excluded from trading decisions while the credit balance is TMN.
+کدها، داده‌های عمومی، آزمایش‌ها و نتایج ما برای [چالش والکس](https://starcoach.ir/hackathon/agentic-ai/challenges/8). نسخهٔ مبنای فعلی **قانون‌محور و بدون نیاز به AI** است؛ مدل زبانی یک گزینهٔ جداگانه است و نتایج سودده به آن نسبت داده نمی‌شوند.
 
-**Status: no real exchange order can be sent from this revision.** Wallex's published [spot order endpoint](https://developers.wallex.ir/docs/spot-create-order) does not document a credit-subaccount routing parameter. The account's API management page also currently requires an advanced verification level before an API key can be created. `wallex-agent live` exits with code 3. These are release blockers, recorded in [implementation status](docs/IMPLEMENTATION_STATUS.md).
+**وضعیت:** بک‌تست و آزمون‌های محلی انجام شده‌اند. مسیر خصوصی API و سفارش با کلید واقعی هنوز تأیید عملی نشده‌اند. هیچ معاملهٔ واقعی از این پروژه انجام نشده است. تست سایهٔ جدید به علت نقص دادهٔ مرجع به‌درستی `HOLD` داده است.
 
-## Quick start
+## نصب و آزمون
 
-Python 3.9+; standard library only. From this directory:
+ربات: Python 3.9+ و کتابخانهٔ استاندارد. پژوهش: NumPy، نسخهٔ بازتولیدشده `2.0.2`.
 
 ```sh
-PYTHONPATH=src python3 -m wallex_agent markets
-PYTHONPATH=src python3 -m wallex_agent scan --top 15
-PYTHONPATH=src python3 -m wallex_agent backtest \
-  --start 2026-10-18T00:00:00Z --end 2026-10-21T00:00:00Z \
-  --model rule --db results/new-backtest.db > results/new-backtest.json
-PYTHONPATH=src python3 -m wallex_agent shadow --model rule --db results/new-shadow.db
-PYTHONPATH=src python3 -m unittest discover -s tests -v
-PYTHONPATH=src python3 -m wallex_agent verify-log results/new-backtest.db
-PYTHONPATH=src python3 -m wallex_agent export-log results/new-backtest.db --last 20
+git clone https://github.com/nematsymphony-spec/wallex-agentic-trader.git
+cd wallex-agentic-trader
+python3 -m venv .venv
+. .venv/bin/activate
+python3 -m pip install -e .
+python3 -m pip install -r experiments/requirements.txt
+python3 -m unittest discover -s tests -v
+PYTHONPATH=src:experiments python3 -m unittest discover -s experiments -p 'test_research30.py' -v
 ```
 
-For a genuine AI shadow cycle, set `OPENAI_API_KEY` in the process environment and run `shadow --model openai`. The default OpenAI model is `gpt-4.1-mini`; set `OPENAI_MODEL` if needed. Never commit keys or put them in command arguments. Without a key or with an invalid model response, the decision is `HOLD` and no order intent is produced. The API request uses strict [Responses structured output](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses), `store: false`, and records only the input hash, decision and rationale.
+پس از نصب، دستور ربات `wallex-credit` است؛ بدون نصب از `PYTHONPATH=src python3 -m wallex_agent.credit_runner` استفاده کنید. دستور قدیمی `wallex-agent` برای نمونهٔ اولیهٔ شبیه‌سازی حفظ شده و مسیر معاملهٔ نسخهٔ فعلی نیست.
 
-For an always-on Linux shadow process, adapt [`deploy/wallex-shadow.service`](deploy/wallex-shadow.service) to the server paths and use a root-owned environment file containing only the OpenAI key and model. `Restart=on-failure` retries after an API outage; an error cycle places no orders. The service has no exchange write capability.
+## استراتژی و مدیریت سرمایه
 
-## Decision path
+### داده و انتخاب فرصت
 
-1. Read Wallex's [active markets](https://developers.wallex.ir/docs/basic-services-markets), [package exclusions](https://developers.wallex.ir/docs/trade-credit-package-details), completed [historical candles](https://developers.wallex.ir/docs/generated/candle-history), and [order book](https://developers.wallex.ir/docs/basic-services-depth). Union the live exclusion list with the [357-market package-183 safety snapshot](config/package-183-exclusions.json) corresponding to the user's forbidden-market list. Discover the full allowed TMN universe each cycle; reject stale or invalid data.
-2. From 73 consecutive completed hourly closes, calculate six non-overlapping 12-hour realized-volatility windows as the square root of summed squared hourly percentage returns. Average each adjacent pair into a day, then weight the newest, middle, and oldest days 50%, 30%, and 20%. Also calculate three-hour and twelve-hour momentum, twelve-hour volatility, trailing 24-hour quote volume, current spread, and top-five bid/ask quote depth.
-3. Admit a market only if its data is fresh, spread is at most 35 bps, **each side** of the book has at least five times the minimum 100,000 TMN order, and 24-hour quote volume is at least 50 million TMN. Rank admitted markets with a bounded volatility percentile bonus (25%), trend (35%), volume (20%), and spread cost (20%). This is a priority score, not a return forecast. Send **all** eligible markets and held positions together to one AI call; it may choose one `BUY`, one `SELL`, or `HOLD` and must name its signals.
-4. Apply an independent risk veto. A buy targets 15% of equity, scales down when depth is thin, and is capped at 20% per position, with at most two open positions.
-5. Pause buys after 2% daily drawdown (Tehran day) and after equity reaches 95% of the starting 5,000,000 TMN. Sells that reduce an existing position remain possible. A price gap can breach these thresholds before a response; the limits are controls, not guarantees.
-6. Record full-universe scan → model decision → risk outcome → order intent → simulated fill as hash-linked SQLite events, with an idempotent client order ID. The log omits API secrets. Use `verify-log` to detect accidental edits or corruption.
+۱. تمام بازارهای اسپات فعال تومانی، پس از حذف ممنوعیت‌های بستهٔ ۱۸۳ و فهرست ثابت کاربر بررسی می‌شوند؛ محدود به BTC/PUMP نیستیم. روزها UTC با مرز **۰۳:۳۰ تهران** هستند. روز و کندل جاری ناقص حذف می‌شوند.
 
-## Evaluation
+۲. هفت روز کامل معتبر، حداقل هفت روز سابقه، حداقل ۱۸ ساعت دارای معامله در روز قبل و حد پایین گردش روز قبل حداقل ۵۰ میلیون تومان لازم است. دامنهٔ روزانه `100 × (high / low − 1)` است.
 
-`backtest` uses completed one-hour bars for features and fills at the **next** bar's opening price with assumed bid/ask spread and 0.3% taker fee per side. Historical depth is unavailable, so the depth assumption is stated in each report. `--model rule` is only an engineering baseline and **does not demonstrate AI performance**. `--model openai` calls the same AI decider as shadow mode, but consumes API calls. Shadow mode uses live public market data and simulated fills; its portfolio is persisted between cycles in the SQLite state table. No shadow result should be presented as a real Wallex account result.
+۳. میانگین دامنهٔ هفت‌روزه، سه‌روزه و گردش محلی به رتبهٔ درصدی تبدیل می‌شوند. امتیاز تاریخی: `(0.4 × rank7 + 0.3 × rank3 + 0.1 × rankVolume) / 0.8`. جزء ۲۰٪ هزینه به دلیل نبود دفتر سفارش تاریخی حذف شده؛ این شاخص، جانشین تاریخیِ وزن کامل ۴۰/۳۰/۲۰/۱۰ است. پنج گزینهٔ اول بررسی و تتر/USDC از نامزد خرید حذف می‌شوند.
 
-Current reports: [full-universe baseline](results/full-universe-baseline-current.json), [full-universe scan](results/full-universe-scan-current.json), [shadow without an OpenAI key](results/full-universe-shadow-current.json), and [result notes](docs/RESULTS.md). [Market-selection notes](docs/MARKET_SELECTION.md) explain the dynamic universe and why high volatility alone is insufficient. Earlier three- and four-market reports used a different per-market decision flow and are retained only as historical prototypes.
+۴. در آخرین کندل ساعتی کامل، رشد ۲۴ساعته باید مثبت و رشد ۲۴ و ۷۲ساعته از تتر بیشتر باشد. امتیاز قدرت نسبی:
 
-A separate, predeclared [72-hour trend-breakout experiment](docs/TREND_72H_RESULT.md) uses the latest completed public Wallex hourly bars, a six-hour maximum hold and the same fee/spread scenario. It returned **−2.5634%** after assumed costs on 2026-10-19 to 2026-10-22. The saved raw candles and script reproduce this exploratory result; no AI model or exchange order was involved.
+```text
+score = (return24_coin − return24_reference) / max(0.001, stdev24_log_returns × sqrt(24))
+reference = BTC برای آلت‌کوین؛ USDT برای خود BTC
+```
 
-## Runbook before a real release
+بالاترین امتیاز مثبت انتخاب می‌شود؛ فیلتر جهت کلی BTC نداریم. تابع امتیاز بین پژوهش و ربات مشترک است. نبود دادهٔ معتبر BTC یا تتر، خرید را متوقف می‌کند. کندل مفقود فقط پس از تطبیق حجم کامل روز می‌تواند با حجم صفر تکمیل شود؛ دادهٔ نامعلوم ساخته نمی‌شود.
 
-See [implementation status](docs/IMPLEMENTATION_STATUS.md). A real-trading adapter must be added **only** after Wallex confirms a credit-only order route and a read-only account identity/balance check. Verify that the API key is scoped to the correct subaccount, and test order status, partial fills, cancellation, exchange min quantity, precision, stale-book handling, API interruption, and restart reconciliation. Use one process and one persistent SQLite database on an always-on server. Store secrets outside the repository. Freeze and hash the exact tested commit before submitting; deploy that same commit only.
+### ورود، نگه‌داری و خروج
 
-The target code-freeze time in the team's plan is **1405/08/01 12:00 Asia/Tehran**. The public demo and GitHub URL remain to be produced after the real system is verified. [Demo outline](docs/DEMO.md) lists what to record without representing simulation as live trading.
+- ورود بعد از بسته‌شدن کندل ساعتی، با بررسی مجدد مجوز بازار، عمق هر دو سمت، هزینه، دقت قیمت/مقدار و حداقل سفارش انجام می‌شود. هزینه یا عمق نامناسب به HOLD می‌انجامد؛ انتخاب دوم با اطلاع پسینی از اجرا نشدن انتخاب اول جایگزین نمی‌شود.
+- طبق انتخاب کاربر، **تمام سرمایهٔ قابل استفاده** پس از رزرو کارمزد و گردکردن مقدار؛ فقط یک موقعیت هم‌زمان. `allocation=1` است و قابل تنظیم است.
+- حد ضرر قیمت هر موقعیت **۵٪**، حداکثر نگه‌داری **۴۸ ساعت**. حد ضرر تضمین سقف زیان حساب نیست؛ شکاف قیمت و هزینه می‌توانند زیان بیشتری ایجاد کنند.
+- افت **۲٪ روزانه** نسبت به ارزش ابتدای روز تهران، خرید تازه را تا روز بعد متوقف می‌کند؛ خروج‌ها ادامه دارند. نسخهٔ انتخاب‌شده توقف ۵٪ کل حساب ندارد؛ نسخه‌های دارای توقف کل نیز با نتایجشان حفظ شده‌اند.
+- هدف خالص حساب **۳٪ یا ۵٪ در بلوک‌های متوالی ۳۰روزه** است، نه ماه تقویمی؛ پیش‌فرض اجرا ۳٪ است. تا رسیدن به هدف، بعد از خروج امکان ورود تازه وجود دارد؛ پس از رسیدن به هدف، تا بلوک بعد نقد می‌مانیم. موقعیت در مرز بلوک به‌زور بسته نمی‌شود.
+- تغییر رتبهٔ نمادها هنگام نگه‌داری موجب تعویض موقعیت نمی‌شود. خروج‌های حفاظتی به پاسخ AI وابسته نیستند.
+- پنج دقیقه قبل از `trading_end_at`، خرید متوقف و تلاش برای فروش الگوریتمی و تسویه به تومان آغاز می‌شود. زمان پایان واقعی معاملات باید صریح تنظیم شود؛ مهلت ارسال کد جای آن نیست. دارایی باقیمانده یا کمتر از حداقل سفارش، نقدشدن موفق گزارش نمی‌شود.
 
-## Sources
+```mermaid
+flowchart TD
+  A[کندل کامل؛ بازارهای مجاز] --> B[غربال نوسان و گردش؛ پنج نامزد]
+  B --> C{قدرت نسبی و دادهٔ مرجع معتبر؟}
+  C -- خیر --> H[HOLD و ثبت دلیل]
+  C -- بله --> D[انتخاب بالاترین امتیاز مثبت]
+  D --> E{هزینه، عمق و حساب تأیید؟}
+  E -- خیر --> H
+  E -- بله --> F[ثبت شناسه و سفارش محدود]
+  F --> G[پیگیری، لغو باقیمانده و تطبیق کیف‌پول]
+  G --> I{حد ضرر، ۴۸ ساعت، هدف یا پایان مسابقه؟}
+  I -- خیر --> G
+  I -- بله --> J[فروش؛ پیگیری تا نقدشدن]
+  J --> K[انتظار تا ساعت، روز یا بلوک مجاز بعدی]
+```
 
-- [Challenge rules and deliverables](https://starcoach.ir/hackathon/agentic-ai/challenges/8)
-- [Wallex package restrictions](https://developers.wallex.ir/docs/trade-credit-package-details)
-- [Wallex spot order API](https://developers.wallex.ir/docs/spot-create-order)
-- [Wallex main wallet separation](https://developers.wallex.ir/docs/basic-services-main-wallet)
-- [OpenAI Responses structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses)
+## نتایج قابل بازتولید
+
+سرمایهٔ شروع ۵ میلیون تومان. نتایج زیر پس از کارمزد **۰٫۳۰٪ هر سمت** و فاصلهٔ کامل خریدوفروش **۰٫۲۰٪ فرضی** هستند. کارمزد اعتبار در مشاهدهٔ حساب صفر بود. فاصلهٔ فرضی، دفتر سفارش تاریخی اندازه‌گیری‌شده نیست. جدول مربوط به سیاست «بدون توقف افت کل حساب» است.
+
+| دوره | هدف هر ۳۰ روز | بازده خالص | موجودی نهایی، تومان | معاملات بسته | بیشترین افت ساعتی |
+|---|---:|---:|---:|---:|---:|
+| ۳۰ روز | ۳٪ | +۳٫۲۲۹٪ | ۵٬۱۶۱٬۴۴۴ | ۱ | ۲٫۷۹۵٪ |
+| ۳۰ روز | ۵٪ | +۵٫۲۷۶٪ | ۵٬۲۶۳٬۸۱۳ | ۱ | ۲٫۷۹۵٪ |
+| ۶۰ روز | ۳٪ | +۶٫۹۳۵٪ | ۵٬۳۴۶٬۷۳۶ | ۲ | ۴٫۳۵۸٪ |
+| ۶۰ روز | ۵٪ | +۱۱٫۸۸۱٪ | ۵٬۵۹۴٬۰۵۲ | ۲ | ۴٫۳۵۸٪ |
+| ۹۰ روز | ۳٪ | +۱۰٫۱۴۳٪ | ۵٬۵۰۷٬۱۴۶ | ۴ | ۵٫۸۰۲٪ |
+| ۹۰ روز | ۵٪ | +۱۷٫۴۷۵٪ | ۵٬۸۷۳٬۷۵۹ | ۴ | ۵٫۸۰۲٪ |
+
+بازهٔ ۹۰روزه: `2026-07-25T00:00:00Z` تا `2026-10-23T00:00:00Z`؛ دوره‌های کوتاه‌تر پایان مشترک دارند. ۵۵ ساعت لازم برای اجرای معامله با دادهٔ دقیقه‌ای و تطبیق حجم بازبینی شدند. بازپخش جدید **۳۶ اجرا**، شامل ۱۸ سناریو و دو ترتیب درون‌کندلی را با همان بازده، افت، کارمزد و تعداد معاملات بازتولید کرد؛ خطای کمتر از `1e-7`.
+
+این نتیجه از معاملات کم و انتخاب استراتژی پس از پژوهش حاصل شده؛ آزمون مستقل آینده یا اثبات سود مستمر نیست. محدودیت بقا در جهان بازارهای فعلی، نبود دفتر سفارش تاریخی، صف، تأخیر و لغزش واقعی برقرار است. تفاوت اجرای واقعی با شبیه‌سازی به معنای یکسان بودن بازده نیست.
+
+### اجرای مجدد پژوهش
+
+دادهٔ عمومی منجمد در `data/` موجود است. از ریشهٔ مخزن:
+
+```sh
+PYTHONPATH=src:experiments python3 experiments/research_monthly_goals.py
+```
+
+این دستور جست‌وجوی پارامتر تازه انجام نمی‌دهد؛ اگر داده‌های دقیقه‌ای لازم حذف شوند، برای تکمیل آن‌ها از API عمومی استفاده می‌کند.
+
+- [جدول همهٔ سیاست‌ها](results/research-monthly-goals/comparison.csv)، [معاملات با دلیل خروج](results/research-monthly-goals/trades.csv)، [بلوک‌های سود](results/research-monthly-goals/blocks.csv).
+- [نتایج کامل](results/research-monthly-goals/results.json)، [تأیید بازپخش جدید](results/credit-validation/policy-parity.json)، [شرح فارسی نتایج](docs/MONTHLY_GOALS_FA.md).
+- [فهرست تمام پژوهش‌های موفق و ناموفق](docs/RESEARCH_INDEX_FA.md)، [مشاهدهٔ کارمزد حساب](docs/VERIFIED_ACCOUNT_FEES.md).
+
+## تست سایه
+
+```sh
+wallex-credit paper --config config/credit-research.json --db results/private/my-paper.db --cycles 12
+wallex-credit status --db results/private/my-paper.db
+wallex-credit export --db results/private/my-paper.db
+```
+
+`paper` به کلید والکس نیاز ندارد و هیچ درخواست خصوصی یا سفارش واقعی ارسال نمی‌کند. سیاست و برنامه‌ریزی سفارش با مسیر واقعی مشترک‌اند؛ پرشدن با قیمت محدود محافظه‌کارانه فرض می‌شود و صف/تأخیر واقعی ارزیابی نمی‌شود.
+
+در آزمون جدید، ۶۲ بازار مجاز دیده شد و ۴۰ بازار از غربال عبور کردند؛ دادهٔ مرجع USDTTMN ناقص بود و خرید انجام نشد. برای هر پروفایل سه چرخه ثبت شد؛ چرخه‌های بعدی منتظر ساعت بعد ماندند. این آزمون کوتاه حفاظت داده است، نه تست سوددهی. تست قدیمی AI هم به علت نبود کلید OpenAI به HOLD رسیده بود. [گزارش سایه و آزمون‌ها](results/credit-validation/validation.json).
+
+## کلید API و اجرای واقعی
+
+بر اساس [مستندات اسپات والکس](https://developers.wallex.ir/docs/spot-intro)، **کلید اختصاصی حساب اعتباری و هدر `sub-account-client-id` هر دو** لازم‌اند. از کلید حساب اصلی استفاده نکنید. برنامه قابلیت برداشت، انتقال یا اتصال کیف‌پول اصلی ندارد.
+
+```sh
+# دریافت محرمانه در ترمینال محلی؛ کلید را در چت یا آرگومان دستور وارد نکنید
+wallex-credit setup --secrets .secrets/credit.json
+
+# فقط خواندن: بررسی حساب prop، بسته ۱۸۳، انقضا، موجودی، سفارش باز و نرخ کارمزد
+wallex-credit doctor --config config/credit-research.json --secrets .secrets/credit.json
+```
+
+در `config/credit-research.json`، `trading_end_at` را با **زمان واقعی پایان معاملات** در قالب ISO8601 دارای منطقهٔ زمانی تنظیم کنید؛ ساختار: `YYYY-MM-DDTHH:MM:SS+03:30`. نرخ Maker/Taker واقعی نماد از `/v1/account/fee` خوانده می‌شود؛ نرخ بالاتر از ذخیرهٔ محافظه‌کارانهٔ تنظیم‌شده مانع خرید است.
+
+```sh
+# پس از بازبینی تنظیمات: اثرانگشت سورس و تنظیمات همان نسخهٔ تحویلی
+wallex-credit freeze
+
+# این دستور قابلیت ثبت سفارش واقعی دارد و باید پیوسته روشن بماند
+wallex-credit run --config config/credit-research.json --secrets .secrets/credit.json \
+  --db results/private/credit-live.db --cycles 0
+```
+
+حساب باید prop فعال و غیرمعلق، از بستهٔ ۱۸۳، با اتصال کیف‌پول اصلی غیرفعال باشد. دارایی یا سفارش مدیریت‌نشده، تغییر غیرمنتظرهٔ کیف‌پول یا پاسخ ناشناخته مانع اجراست؛ fallback به حساب اصلی وجود ندارد. **این مسیر با کلید واقعی هنوز آزموده نشده است.**
+
+شناسه پیش از POST در SQLite ثبت می‌شود. در قطع ارتباط، POST تکرار نمی‌شود؛ همان شناسه استعلام می‌شود. سفارش باز بعد از ۲۰ ثانیه درخواست لغو می‌گیرد و نهایی‌شدن باید تأیید شود. پس از نهایی‌شدن، موجودی واقعی کیف‌پول مبناست. خروج ناقص تا حد عمق مجاز پیگیری می‌شود. فقط **یک پردازش و یک فایل وضعیت برای هر حساب** اجرا کنید؛ فایل وضعیت زنده را حذف یا جایگزین نکنید. [راهنمای عملیات](docs/CREDIT_RUNBOOK_FA.md).
+
+## معماری و لاگ تصمیم‌ها
+
+| جزء | پیاده‌سازی |
+|---|---|
+| بازار، کندل، عمق و ممنوعیت‌ها | `src/wallex_agent/clients.py` |
+| غربال و قدرت نسبی مشترک با پژوهش | `src/wallex_agent/monthly_policy.py` |
+| اتصال فقط به حساب اعتباری و چرخهٔ سفارش | `src/wallex_agent/credit_api.py` |
+| سیاست، کنترل ریسک، وضعیت پایدار و اجرای سایه/واقعی | `src/wallex_agent/credit_runner.py` |
+| لاگ SQLite با زنجیرهٔ هش | `src/wallex_agent/engine.py: AuditLog` |
+| تمام خانواده‌های استراتژی و ارزیابی‌ها | `experiments/` و `results/` |
+
+هر سفارش به ورودی بازار، دلیل ورود/خروج، کنترل هزینه، عمق، شناسه و نتیجهٔ اجرا وصل است. در اجرای زنده، خروجی لاگ معاملات پس از حذف اطلاعات حساب باید به تحویل داور افزوده شود؛ اکنون هیچ لاگ معاملهٔ واقعی وجود ندارد. کلیدها و فایل‌های خصوصی منتشر نمی‌شوند.
+
+`credit-research.json` مبنای فعلی و بدون AI است. `credit-competition-ai.json` پروفایل اختیاریِ حق رد ورود توسط OpenAI است؛ پاسخ نامعتبر یا نبود کلید به HOLD می‌انجامد. نتایج جدول مربوط به این پروفایل نیستند. طبق تصمیم فعلی تیم، معیار امتیاز «نقش واقعی AI» هدف‌گذاری نشده؛ صرف وجود ماژول، اثبات کسب آن امتیاز نیست.
+
+## ضوابط و وضعیت تحویل
+
+[پروندهٔ تحویل](docs/SUBMISSION_FA.md) معماری، قواعد، لاگ و سناریوی دموی حدود پنج دقیقه را توضیح می‌دهد. مرور صفحهٔ مسابقه مهلت **۱ آبان ۱۴۰۵ ساعت ۲۳:۵۰ تهران** و ارسال یک‌بارهٔ لینک GitHub و ویدئوی عمومی را نشان داد. ویدئو الزامی است و هنوز تولید/منتشر نشده؛ این مخزن به‌تنهایی تحویل کامل مسابقه نیست. فرم مسابقه ارسال نشده است.
+
+`release/manifest.json` اثرانگشت سورس و تنظیمات است؛ تغییر آن‌ها تا freeze مجدد مانع شروع اجرای واقعی می‌شود. سورس در حال معامله باید همان نسخهٔ تحویلی باقی بماند. تنها حساب اختصاصی و معاملات الگوریتمیِ بازارهای مجاز استفاده می‌شوند؛ در پایان باید سود/زیان به تومان محقق شود. میزان سرمایه‌گذاری کامل انتخاب کاربر است و با توصیهٔ امتیازی مدیریت سرمایهٔ مسابقه یکسان نیست.

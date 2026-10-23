@@ -1,0 +1,21 @@
+{
+  "package_id": 183,
+  "observed_date_tehran": "2026-10-23",
+  "source_url": "https://wallex.ir/app/trade-credit/dashboard",
+  "source_type": "authenticated credit-account dashboard, visible UI in user's Chrome session",
+  "package_title": "هکاتون استارکوچ | والکس",
+  "transaction_fee_each_side": {
+    "TMN": {"maker": "0.0025", "taker": "0.003"},
+    "USDT": {"maker": "0.001", "taker": "0.0013"}
+  },
+  "credit_fee_shown_tmn": {
+    "three_day_package": "0",
+    "accrued_to_observation_date": "0"
+  },
+  "notes": [
+    "Rates are account-specific current observations, not a historical fee schedule.",
+    "Credit fee and transaction fee are separate: zero credit fee does not imply zero trading fees.",
+    "Historical bid/ask spread and actual maker fills remain unverified.",
+    "Existing 0.003-per-side TMN taker backtests match this observed transaction rate."
+  ]
+}

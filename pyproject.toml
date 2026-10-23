@@ -7,6 +7,7 @@ dependencies = []
 
 [project.scripts]
 wallex-agent = "wallex_agent.cli:main"
+wallex-credit = "wallex_agent.credit_runner:main"
 
 [build-system]
 requires = ["setuptools>=61"]

@@ -1,0 +1,62 @@
+[
+  {
+    "file": "BTCUSDT-1m-2026-10-19.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2026-10-19.zip",
+    "sha256": "b2fdee20be764f88cd640d933a492bcdfe833452fff1d6fb87b9ede081e8061b",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "BTCUSDT-1m-2026-10-20.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2026-10-20.zip",
+    "sha256": "d580973ba32d82a94f3669a3472b7a81a4ac598777df8bab88e9ff26d7924c75",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "BTCUSDT-1m-2026-10-21.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2026-10-21.zip",
+    "sha256": "1627cc21691c046cf16fc63011e6d929fcead8dd5509f3fa4e81f630bd9ad5ef",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "PUMPUSDT-1m-2026-10-19.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/PUMPUSDT/1m/PUMPUSDT-1m-2026-10-19.zip",
+    "sha256": "524dc82999cd53f518b0d35f1d4699f08b0880baf97ca7dd84635a300048303d",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "PUMPUSDT-1m-2026-10-20.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/PUMPUSDT/1m/PUMPUSDT-1m-2026-10-20.zip",
+    "sha256": "e01e5e1ea704f8f1116a0b4e0f146d79ca0c3af13a1292ebeaf361005f6e2ec2",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "PUMPUSDT-1m-2026-10-21.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/PUMPUSDT/1m/PUMPUSDT-1m-2026-10-21.zip",
+    "sha256": "72c42591726c1e9f9afcaec98df3672f848562c641c903bd726f4fba38e2adb1",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "BTCUSDT-1m-2026-10-17.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2026-10-17.zip",
+    "sha256": "ce5536cff2985e8b1b36c115627c7a30cc8c43d89e2172d5bf5cf3b0dd2fc03a",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "BTCUSDT-1m-2026-10-18.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2026-10-18.zip",
+    "sha256": "7b4d9784e2034cb7a05860d2b67ceb74368eb5d71d8f2e16a04e00e2045cb784",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "PUMPUSDT-1m-2026-10-17.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/PUMPUSDT/1m/PUMPUSDT-1m-2026-10-17.zip",
+    "sha256": "5b7a37b72ecaed22f2e54a6e51ec35cf97cc602323e0cf302a0283cd1296c8cd",
+    "official_checksum_verified": true
+  },
+  {
+    "file": "PUMPUSDT-1m-2026-10-18.zip",
+    "url": "https://data.binance.vision/data/spot/daily/klines/PUMPUSDT/1m/PUMPUSDT-1m-2026-10-18.zip",
+    "sha256": "457da9528039a5db2f0e056a37fe2b6c9123b1cf8ead16c89154e71afe0db5f9",
+    "official_checksum_verified": true
+  }
+]

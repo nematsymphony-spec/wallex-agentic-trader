@@ -1,0 +1,19 @@
+[Unit]
+Description=Wallex dedicated-credit strategy runner
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wallex
+WorkingDirectory=/opt/wallex-agentic-trader
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/wallex-agentic-trader/.venv/bin/wallex-credit run --config config/credit-research.json --secrets /etc/wallex/credit.json --db results/private/credit-live.db --cycles 0
+Restart=on-failure
+RestartSec=10
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

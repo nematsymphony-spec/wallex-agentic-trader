@@ -1,0 +1,6 @@
+{
+  "runs": 36,
+  "all_original_returns_drawdowns_fees_trade_counts_reproduced": true,
+  "tolerance": 1e-07,
+  "new_grid_search": false
+}

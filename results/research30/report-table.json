@@ -1,0 +1,128 @@
+[
+  {
+    "family": "relative_strength",
+    "id": "relative_strength-007-goal5",
+    "config": {
+      "id": "relative_strength-007-goal5",
+      "family": "relative_strength",
+      "hold": 48,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "score": "r24",
+      "regime": "none",
+      "profit_goal": 0.05
+    },
+    "return_pct": 5.276269110845444,
+    "pnl_tmn": 263813.45554227196,
+    "max_drawdown_pct": 2.7950153806591826,
+    "trades": 1,
+    "median_hold_hours": 10.116666666666667,
+    "fees_tmn": 30793.247689728
+  },
+  {
+    "family": "range_reversion",
+    "id": "range_reversion-018-goal5",
+    "config": {
+      "id": "range_reversion-018-goal5",
+      "family": "range_reversion",
+      "hold": 24,
+      "stop_kind": "atr",
+      "stop": 2.5,
+      "tp": 0.0,
+      "z": 1.5,
+      "er": 0.2,
+      "target_vwap": true,
+      "profit_goal": 0.05
+    },
+    "return_pct": -6.7241648426018426,
+    "pnl_tmn": -336208.24213009235,
+    "max_drawdown_pct": 9.609381863739607,
+    "trades": 1,
+    "median_hold_hours": 12.816666666666666,
+    "fees_tmn": 28988.21993340995
+  },
+  {
+    "family": "compression_breakout",
+    "id": "compression_breakout-055-goal3",
+    "config": {
+      "id": "compression_breakout-055-goal3",
+      "family": "compression_breakout",
+      "hold": 12,
+      "stop_kind": "fixed",
+      "stop": 0.03,
+      "tp": 0.05,
+      "lookback": 12,
+      "compression": 0.75,
+      "volume_ratio": 1.0,
+      "profit_goal": 0.03
+    },
+    "return_pct": -7.218107636467275,
+    "pnl_tmn": -360905.3818233637,
+    "max_drawdown_pct": 7.218107636467275,
+    "trades": 2,
+    "median_hold_hours": 2.833333333333333,
+    "fees_tmn": 57810.976189145586
+  },
+  {
+    "family": "exit_comparison",
+    "id": "exit_comparison-001",
+    "config": {
+      "id": "exit_comparison-001",
+      "family": "exit_comparison",
+      "hold": 24,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "exit_kind": "fixed",
+      "trailing": false
+    },
+    "return_pct": -5.662011823616142,
+    "pnl_tmn": -283100.591180807,
+    "max_drawdown_pct": 7.735777431282898,
+    "trades": 1,
+    "median_hold_hours": 14.2,
+    "fees_tmn": 29144.624716607395
+  },
+  {
+    "family": "ai_filter",
+    "id": "ai_filter-001",
+    "config": {
+      "id": "ai_filter-001",
+      "family": "ai_filter",
+      "hold": 6,
+      "stop_kind": "atr",
+      "stop": 2.0,
+      "tp": 0.0,
+      "horizon": 6,
+      "ridge": 10.0,
+      "margin": 0.0,
+      "regime": "none"
+    },
+    "return_pct": 0.0,
+    "pnl_tmn": 0.0,
+    "max_drawdown_pct": 0.0,
+    "trades": 0,
+    "median_hold_hours": 0.0,
+    "fees_tmn": 0.0
+  },
+  {
+    "family": "volatility_control",
+    "id": "volatility_control-001",
+    "config": {
+      "id": "volatility_control-001",
+      "family": "volatility_control",
+      "hold": 24,
+      "stop_kind": "fixed",
+      "stop": 0.05,
+      "tp": 0.0,
+      "positive": false
+    },
+    "return_pct": -5.662011823616142,
+    "pnl_tmn": -283100.591180807,
+    "max_drawdown_pct": 7.735777431282898,
+    "trades": 1,
+    "median_hold_hours": 14.2,
+    "fees_tmn": 29144.624716607395
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "cash_chained_across_blocks": true,
+  "compounding_reconciled": true,
+  "no_hidden_deposits": true,
+  "trade_pnl_reconciled": true,
+  "config_search_performed": false,
+  "unresolved_hours": []
+}

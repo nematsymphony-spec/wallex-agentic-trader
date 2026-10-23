@@ -1,0 +1,508 @@
+{
+  "PEPETMN": {
+    "real_hour_bars": 1631,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2023-05-24T00:00:00Z"
+  },
+  "BTCTMN": {
+    "real_hour_bars": 1631,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-04-01T00:00:00Z"
+  },
+  "PUMPTMN": {
+    "real_hour_bars": 1607,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 24,
+    "volume_reconciled_days": 67,
+    "unreconciled_day_timestamps": [
+      1786838400
+    ],
+    "listed_at": "2025-08-20T00:00:00Z"
+  },
+  "ETHTMN": {
+    "real_hour_bars": 1631,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-05-01T00:00:00Z"
+  },
+  "BNBTMN": {
+    "real_hour_bars": 1618,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 1,
+    "volume_reconciled_days": 67,
+    "unreconciled_day_timestamps": [
+      1790812800
+    ],
+    "listed_at": "2021-06-01T00:00:00Z"
+  },
+  "USDTTMN": {
+    "real_hour_bars": 1408,
+    "verified_zero_volume_fills": 18,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-01-01T00:00:00Z"
+  },
+  "USOONTMN": {
+    "real_hour_bars": 1629,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2026-03-12T00:00:00Z"
+  },
+  "XAUTTMN": {
+    "real_hour_bars": 1625,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-08-06T00:00:00Z"
+  },
+  "XRPTMN": {
+    "real_hour_bars": 1630,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-11-01T00:00:00Z"
+  },
+  "DOGETMN": {
+    "real_hour_bars": 1629,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-12-18T00:00:00Z"
+  },
+  "SOLTMN": {
+    "real_hour_bars": 1626,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-03-16T00:00:00Z"
+  },
+  "ARBTMN": {
+    "real_hour_bars": 1578,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2023-07-17T00:00:00Z"
+  },
+  "TRXTMN": {
+    "real_hour_bars": 1631,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-02-01T00:00:00Z"
+  },
+  "ADATMN": {
+    "real_hour_bars": 1622,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-05-01T00:00:00Z"
+  },
+  "STMN": {
+    "real_hour_bars": 1615,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-01-14T00:00:00Z"
+  },
+  "APETMN": {
+    "real_hour_bars": 1065,
+    "verified_zero_volume_fills": 2,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-05-24T00:00:00Z"
+  },
+  "LTCTMN": {
+    "real_hour_bars": 1535,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-08-01T00:00:00Z"
+  },
+  "SHIBTMN": {
+    "real_hour_bars": 1601,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-12-18T00:00:00Z"
+  },
+  "SLVONTMN": {
+    "real_hour_bars": 1584,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2026-02-03T00:00:00Z"
+  },
+  "AAVETMN": {
+    "real_hour_bars": 1194,
+    "verified_zero_volume_fills": 10,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-05-15T00:00:00Z"
+  },
+  "FILTMN": {
+    "real_hour_bars": 1500,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-01T00:00:00Z"
+  },
+  "SUITMN": {
+    "real_hour_bars": 1463,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-08-19T00:00:00Z"
+  },
+  "FLOKITMN": {
+    "real_hour_bars": 1353,
+    "verified_zero_volume_fills": 8,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2023-05-28T00:00:00Z"
+  },
+  "UNITMN": {
+    "real_hour_bars": 1422,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-17T00:00:00Z"
+  },
+  "WLDTMN": {
+    "real_hour_bars": 1368,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-04-23T00:00:00Z"
+  },
+  "HBARTMN": {
+    "real_hour_bars": 988,
+    "verified_zero_volume_fills": 2,
+    "unknown_hours": 24,
+    "volume_reconciled_days": 67,
+    "unreconciled_day_timestamps": [
+      1790294400
+    ],
+    "listed_at": "2025-09-02T00:00:00Z"
+  },
+  "BCHTMN": {
+    "real_hour_bars": 1509,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-07-01T00:00:00Z"
+  },
+  "HYPETMN": {
+    "real_hour_bars": 1429,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-08-20T00:00:00Z"
+  },
+  "DOTTMN": {
+    "real_hour_bars": 1497,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-01-01T00:00:00Z"
+  },
+  "PENGUTMN": {
+    "real_hour_bars": 1210,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-09-03T00:00:00Z"
+  },
+  "SANDTMN": {
+    "real_hour_bars": 1164,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-25T00:00:00Z"
+  },
+  "CHZTMN": {
+    "real_hour_bars": 1035,
+    "verified_zero_volume_fills": 2,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-19T00:00:00Z"
+  },
+  "AVAXTMN": {
+    "real_hour_bars": 1423,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-03-16T00:00:00Z"
+  },
+  "COPXONTMN": {
+    "real_hour_bars": 1542,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2026-05-10T00:00:00Z"
+  },
+  "SEITMN": {
+    "real_hour_bars": 1009,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-12-30T00:00:00Z"
+  },
+  "LINKTMN": {
+    "real_hour_bars": 1502,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-16T00:00:00Z"
+  },
+  "DYDXTMN": {
+    "real_hour_bars": 883,
+    "verified_zero_volume_fills": 7,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-08-11T00:00:00Z"
+  },
+  "CAKETMN": {
+    "real_hour_bars": 1496,
+    "verified_zero_volume_fills": 2,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-15T00:00:00Z"
+  },
+  "FORMTMN": {
+    "real_hour_bars": 1227,
+    "verified_zero_volume_fills": 6,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-03-21T00:00:00Z"
+  },
+  "ENATMN": {
+    "real_hour_bars": 1298,
+    "verified_zero_volume_fills": 6,
+    "unknown_hours": 24,
+    "volume_reconciled_days": 67,
+    "unreconciled_day_timestamps": [
+      1786838400
+    ],
+    "listed_at": "2025-08-19T00:00:00Z"
+  },
+  "GALATMN": {
+    "real_hour_bars": 1478,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 24,
+    "volume_reconciled_days": 67,
+    "unreconciled_day_timestamps": [
+      1786838400
+    ],
+    "listed_at": "2022-05-01T00:00:00Z"
+  },
+  "USDCTMN": {
+    "real_hour_bars": 757,
+    "verified_zero_volume_fills": 6,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-11-06T00:00:00Z"
+  },
+  "MOGTMN": {
+    "real_hour_bars": 1421,
+    "verified_zero_volume_fills": 5,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-08-20T00:00:00Z"
+  },
+  "SUSHITMN": {
+    "real_hour_bars": 655,
+    "verified_zero_volume_fills": 28,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-01-07T00:00:00Z"
+  },
+  "POLTMN": {
+    "real_hour_bars": 1550,
+    "verified_zero_volume_fills": 1,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-09-09T00:00:00Z"
+  },
+  "PEOPLETMN": {
+    "real_hour_bars": 801,
+    "verified_zero_volume_fills": 8,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-06-23T00:00:00Z"
+  },
+  "XLMTMN": {
+    "real_hour_bars": 1193,
+    "verified_zero_volume_fills": 8,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2020-12-01T00:00:00Z"
+  },
+  "EIGENTMN": {
+    "real_hour_bars": 395,
+    "verified_zero_volume_fills": 12,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2024-10-26T00:00:00Z"
+  },
+  "IMXTMN": {
+    "real_hour_bars": 305,
+    "verified_zero_volume_fills": 30,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-11-04T00:00:00Z"
+  },
+  "ATOMTMN": {
+    "real_hour_bars": 1342,
+    "verified_zero_volume_fills": 5,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-07-01T00:00:00Z"
+  },
+  "AXSTMN": {
+    "real_hour_bars": 486,
+    "verified_zero_volume_fills": 24,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-23T00:00:00Z"
+  },
+  "ALICETMN": {
+    "real_hour_bars": 869,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-29T00:00:00Z"
+  },
+  "ELONTMN": {
+    "real_hour_bars": 1288,
+    "verified_zero_volume_fills": 3,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-01-27T00:00:00Z"
+  },
+  "ENJTMN": {
+    "real_hour_bars": 773,
+    "verified_zero_volume_fills": 4,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-09-09T00:00:00Z"
+  },
+  "COOKIETMN": {
+    "real_hour_bars": 982,
+    "verified_zero_volume_fills": 8,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-06-09T00:00:00Z"
+  },
+  "ETCTMN": {
+    "real_hour_bars": 635,
+    "verified_zero_volume_fills": 19,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-05-08T00:00:00Z"
+  },
+  "1INCHTMN": {
+    "real_hour_bars": 534,
+    "verified_zero_volume_fills": 11,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-05-28T00:00:00Z"
+  },
+  "MANATMN": {
+    "real_hour_bars": 593,
+    "verified_zero_volume_fills": 13,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2021-12-21T00:00:00Z"
+  },
+  "AGLDTMN": {
+    "real_hour_bars": 321,
+    "verified_zero_volume_fills": 40,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-06-09T00:00:00Z"
+  },
+  "EGLDTMN": {
+    "real_hour_bars": 547,
+    "verified_zero_volume_fills": 26,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-03-16T00:00:00Z"
+  },
+  "TNSRTMN": {
+    "real_hour_bars": 824,
+    "verified_zero_volume_fills": 12,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2025-09-03T00:00:00Z"
+  },
+  "YFITMN": {
+    "real_hour_bars": 222,
+    "verified_zero_volume_fills": 30,
+    "unknown_hours": 0,
+    "volume_reconciled_days": 68,
+    "unreconciled_day_timestamps": [],
+    "listed_at": "2022-05-22T00:00:00Z"
+  }
+}

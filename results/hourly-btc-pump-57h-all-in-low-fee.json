@@ -1,0 +1,350 @@
+{
+  "kind": "exploratory_historical_simulation",
+  "data_sha256": "44ebe458af659b40b9c678bcfc10d25fc99c9600900d83aec888f4866cb0d448",
+  "start_utc": "2026-10-20T03:00:00+00:00",
+  "end_utc": "2026-10-22T12:00:00+00:00",
+  "warmup_hours": 168,
+  "test_hours": 57,
+  "assumptions": {
+    "starting_cash_tmn": 5000000.0,
+    "allocation": "all available cash on each buy",
+    "fee_each_side": 0.002,
+    "full_spread_bps": 20.0,
+    "risk": "2% Tehran-day pause on new buys; 5% loss from initial equity exits at next open and stops new buys",
+    "execution": "next hourly open after completed signal; terminal sale at final completed close",
+    "historical_depth": "unavailable",
+    "slippage": "not modeled",
+    "credit_daily_fee": "not modeled"
+  },
+  "results": {
+    "BTCTMN": {
+      "buy_hold_all_in": {
+        "net_return_pct": 3.5342773234282143,
+        "net_pnl_tmn": 176713.86617141124,
+        "max_drawdown_pct": 2.9470688510239262,
+        "trades": 1,
+        "wins": 1,
+        "fees_tmn": 20354.21600467153,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792465200,
+            "exit_ts": 1792670400,
+            "pnl_tmn": 176713.86617141124
+          }
+        ]
+      },
+      "reversal_1h": {
+        "net_return_pct": -5.318585249399021,
+        "net_pnl_tmn": -265929.26246995106,
+        "max_drawdown_pct": 5.318585249399021,
+        "trades": 9,
+        "wins": 1,
+        "fees_tmn": 175924.47917296854,
+        "total_stop_triggered": true,
+        "trade_log": [
+          {
+            "entry_ts": 1792465200,
+            "exit_ts": 1792468800,
+            "pnl_tmn": -9149.452372211032
+          },
+          {
+            "entry_ts": 1792472400,
+            "exit_ts": 1792476000,
+            "pnl_tmn": -51171.533945089206
+          },
+          {
+            "entry_ts": 1792476000,
+            "exit_ts": 1792479600,
+            "pnl_tmn": -30483.460824259557
+          },
+          {
+            "entry_ts": 1792483200,
+            "exit_ts": 1792486800,
+            "pnl_tmn": 7389.399640098214
+          },
+          {
+            "entry_ts": 1792490400,
+            "exit_ts": 1792494000,
+            "pnl_tmn": -23207.76031518355
+          },
+          {
+            "entry_ts": 1792551600,
+            "exit_ts": 1792555200,
+            "pnl_tmn": -37599.59118315112
+          },
+          {
+            "entry_ts": 1792555200,
+            "exit_ts": 1792558800,
+            "pnl_tmn": -29045.063870965503
+          },
+          {
+            "entry_ts": 1792580400,
+            "exit_ts": 1792584000,
+            "pnl_tmn": -44755.50484909676
+          },
+          {
+            "entry_ts": 1792620000,
+            "exit_ts": 1792623600,
+            "pnl_tmn": -47906.29475009255
+          }
+        ]
+      },
+      "momentum_volume_1h": {
+        "net_return_pct": 1.3751090430317525,
+        "net_pnl_tmn": 68755.45215158816,
+        "max_drawdown_pct": 2.2746420138357815,
+        "trades": 3,
+        "wins": 2,
+        "fees_tmn": 60900.788660152364,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792486800,
+            "exit_ts": 1792530000,
+            "pnl_tmn": 10709.16276433412
+          },
+          {
+            "entry_ts": 1792569600,
+            "exit_ts": 1792612800,
+            "pnl_tmn": 169271.4571928149
+          },
+          {
+            "entry_ts": 1792616400,
+            "exit_ts": 1792634400,
+            "pnl_tmn": -111225.16780556086
+          }
+        ]
+      },
+      "breakout_1h": {
+        "net_return_pct": 1.3751090430317525,
+        "net_pnl_tmn": 68755.45215158816,
+        "max_drawdown_pct": 2.2746420138357815,
+        "trades": 3,
+        "wins": 2,
+        "fees_tmn": 60900.788660152364,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792486800,
+            "exit_ts": 1792530000,
+            "pnl_tmn": 10709.16276433412
+          },
+          {
+            "entry_ts": 1792569600,
+            "exit_ts": 1792612800,
+            "pnl_tmn": 169271.4571928149
+          },
+          {
+            "entry_ts": 1792616400,
+            "exit_ts": 1792634400,
+            "pnl_tmn": -111225.16780556086
+          }
+        ]
+      },
+      "ema_1h": {
+        "net_return_pct": 1.1486856315118477,
+        "net_pnl_tmn": 57434.281575592235,
+        "max_drawdown_pct": 1.0970801631925653,
+        "trades": 2,
+        "wins": 1,
+        "fees_tmn": 40569.39587494596,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792494000,
+            "exit_ts": 1792580400,
+            "pnl_tmn": 113533.824271244
+          },
+          {
+            "entry_ts": 1792666800,
+            "exit_ts": 1792670400,
+            "pnl_tmn": -56099.54269565176
+          }
+        ]
+      }
+    },
+    "PUMPTMN": {
+      "buy_hold_all_in": {
+        "net_return_pct": 11.612051003510304,
+        "net_pnl_tmn": 580602.550175515,
+        "max_drawdown_pct": 6.676342525399114,
+        "trades": 1,
+        "wins": 1,
+        "fees_tmn": 21163.61216500039,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792465200,
+            "exit_ts": 1792670400,
+            "pnl_tmn": 580602.550175515
+          }
+        ]
+      },
+      "reversal_1h": {
+        "net_return_pct": -5.4399979042673134,
+        "net_pnl_tmn": -271999.89521336555,
+        "max_drawdown_pct": 5.4399979042673134,
+        "trades": 6,
+        "wins": 1,
+        "fees_tmn": 116814.78864759704,
+        "total_stop_triggered": true,
+        "trade_log": [
+          {
+            "entry_ts": 1792468800,
+            "exit_ts": 1792472400,
+            "pnl_tmn": -34220.781788957305
+          },
+          {
+            "entry_ts": 1792472400,
+            "exit_ts": 1792476000,
+            "pnl_tmn": -85407.72018526029
+          },
+          {
+            "entry_ts": 1792533600,
+            "exit_ts": 1792537200,
+            "pnl_tmn": -56536.16363259591
+          },
+          {
+            "entry_ts": 1792537200,
+            "exit_ts": 1792540800,
+            "pnl_tmn": 72090.54010930005
+          },
+          {
+            "entry_ts": 1792548000,
+            "exit_ts": 1792551600,
+            "pnl_tmn": -121985.50502247456
+          },
+          {
+            "entry_ts": 1792623600,
+            "exit_ts": 1792627200,
+            "pnl_tmn": -45940.26469337754
+          }
+        ]
+      },
+      "momentum_volume_1h": {
+        "net_return_pct": 7.184919022043412,
+        "net_pnl_tmn": 359245.95110217016,
+        "max_drawdown_pct": 4.142973192526378,
+        "trades": 3,
+        "wins": 2,
+        "fees_tmn": 63322.03684628679,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792501200,
+            "exit_ts": 1792544400,
+            "pnl_tmn": 360233.3576174304
+          },
+          {
+            "entry_ts": 1792544400,
+            "exit_ts": 1792587600,
+            "pnl_tmn": -70003.04720219597
+          },
+          {
+            "entry_ts": 1792598400,
+            "exit_ts": 1792638000,
+            "pnl_tmn": 69015.64068693575
+          }
+        ]
+      },
+      "breakout_1h": {
+        "net_return_pct": 7.184919022043412,
+        "net_pnl_tmn": 359245.95110217016,
+        "max_drawdown_pct": 4.142973192526378,
+        "trades": 3,
+        "wins": 2,
+        "fees_tmn": 63322.03684628679,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "entry_ts": 1792501200,
+            "exit_ts": 1792544400,
+            "pnl_tmn": 360233.3576174304
+          },
+          {
+            "entry_ts": 1792544400,
+            "exit_ts": 1792587600,
+            "pnl_tmn": -70003.04720219597
+          },
+          {
+            "entry_ts": 1792598400,
+            "exit_ts": 1792638000,
+            "pnl_tmn": 69015.64068693575
+          }
+        ]
+      },
+      "ema_1h": {
+        "net_return_pct": 0.0,
+        "net_pnl_tmn": 0.0,
+        "max_drawdown_pct": 0.0,
+        "trades": 0,
+        "wins": 0,
+        "fees_tmn": 0.0,
+        "total_stop_triggered": false,
+        "trade_log": []
+      }
+    },
+    "BTC_PUMP_ROTATION": {
+      "relative_strength_1h": {
+        "net_return_pct": -2.895113364455515,
+        "net_pnl_tmn": -144755.66822277568,
+        "max_drawdown_pct": 5.83527709002114,
+        "trades": 7,
+        "wins": 2,
+        "fees_tmn": 139214.7940221455,
+        "total_stop_triggered": false,
+        "trade_log": [
+          {
+            "symbol": "PUMPTMN",
+            "entry_ts": 1792486800,
+            "exit_ts": 1792497600,
+            "pnl_tmn": -38435.23492048029
+          },
+          {
+            "symbol": "BTCTMN",
+            "entry_ts": 1792497600,
+            "exit_ts": 1792501200,
+            "pnl_tmn": -17294.185295099393
+          },
+          {
+            "symbol": "PUMPTMN",
+            "entry_ts": 1792504800,
+            "exit_ts": 1792522800,
+            "pnl_tmn": 70383.03897563554
+          },
+          {
+            "symbol": "PUMPTMN",
+            "entry_ts": 1792526400,
+            "exit_ts": 1792551600,
+            "pnl_tmn": 31238.68902077712
+          },
+          {
+            "symbol": "PUMPTMN",
+            "entry_ts": 1792569600,
+            "exit_ts": 1792584000,
+            "pnl_tmn": -85302.40484757442
+          },
+          {
+            "symbol": "PUMPTMN",
+            "entry_ts": 1792616400,
+            "exit_ts": 1792627200,
+            "pnl_tmn": -11479.196749384515
+          },
+          {
+            "symbol": "PUMPTMN",
+            "entry_ts": 1792630800,
+            "exit_ts": 1792634400,
+            "pnl_tmn": -93866.37440664973
+          }
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "One 57-hour exploratory window; no out-of-sample or random placebo",
+    "No historical bid/ask/depth; spread is assumed",
+    "Account fees and credit daily fee unverified",
+    "No AI inference; rotation is a deterministic proxy"
+  ]
+}

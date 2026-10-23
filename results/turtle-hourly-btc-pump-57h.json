@@ -1,0 +1,1262 @@
+{
+  "kind": "offline_historical_replay_hourly_turtle_adaptations",
+  "data_sha256": "44ebe458af659b40b9c678bcfc10d25fc99c9600900d83aec888f4866cb0d448",
+  "start_utc": "2026-10-20T03:00:00+00:00",
+  "end_utc": "2026-10-22T12:00:00+00:00",
+  "starting_capital_per_independent_coin_tmn": 5000000.0,
+  "rules": {
+    "entry": "completed close strictly beyond preceding 20 or 55 hourly highs; next open fill",
+    "exit": "completed close below preceding 10 or 20 hourly lows; next open fill",
+    "stop": "fixed entry fill minus 2N; intrahour low touch, gaps filled at open",
+    "N": "20-bar Wilder smoothing of TR, seeded with first 20-bar arithmetic mean",
+    "S1_filter": "track virtual long and short 20/10 breakouts during warmup and test; skip after gross winner; 55h failsafe",
+    "allocation": "all available cash, fee reserved, no leverage, short sales or pyramiding",
+    "portfolio_guards": "same 2% Tehran-day new-buy pause and 5% initial-equity stop at next open as earlier hourly tests"
+  },
+  "costs": {
+    "fee_each_side": 0.003,
+    "full_spread_bps_assumed": 20,
+    "credit_package_fee_tmn": 0,
+    "fee_evidence": "config/package-183-fees-observed.json"
+  },
+  "limitations": [
+    "57h exploratory window with 168h indicator warmup, no parameter search or held-out test",
+    "This is an hourly close-confirmed long-only all-in adaptation, not the original daily intrabar futures system",
+    "Historical spread, depth, actual slippage, fill availability, precision and minimum-order rules not modeled",
+    "Drawdown sampled hourly at closes; stop executions included but other intrahour equity extremes absent",
+    "2N stop fills optimistic if book lacks liquidity; OHLC gives stop hour not exact execution time",
+    "Virtual filter starts with prior breakout classified as loser; finite warmup may affect state",
+    "S1 failsafe uses 10h exit in this specified adaptation; all exits forced at test end",
+    "Zero-cost scenario is a diagnostic, not an available trading fee"
+  ],
+  "results": {
+    "base": {
+      "BTCTMN": {
+        "buy_hold_all_in": {
+          "net_return_pct": 3.327414390536698,
+          "net_pnl_tmn": 166370.7195268348,
+          "max_drawdown_pct": 2.9470688510239373,
+          "trades": 1,
+          "wins": 1,
+          "fees_tmn": 30500.884003012274,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792465200,
+              "exit_ts": 1792670400,
+              "pnl_tmn": 166370.7195268348
+            }
+          ]
+        },
+        "s1_20_10_filtered": {
+          "net_return_pct": -4.951012854876014,
+          "net_pnl_tmn": -247550.64274380077,
+          "final_equity_tmn": 4752449.357256199,
+          "max_drawdown_pct": 4.951012854876014,
+          "trades": 3,
+          "wins": 0,
+          "fees_tmn": 87790.36624031943,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792501200,
+              "exit_ts": 1792504800,
+              "entry_fill": 21450708423.143997,
+              "exit_fill": 21244052249.10728,
+              "quantity": 0.00023239534877203552,
+              "stop_raw_price": 21265317566.673954,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -77792.1250326559
+            },
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 21664191865.315998,
+              "exit_fill": 21401941185.062172,
+              "quantity": 0.0002265252010885304,
+              "stop_raw_price": 21423364549.611782,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -88673.0814281283
+            },
+            {
+              "entry_ts": 1792573200,
+              "exit_ts": 1792652400,
+              "entry_fill": 22007624472.833996,
+              "exit_fill": 21768654677.528625,
+              "quantity": 0.00021897309120324506,
+              "stop_raw_price": 21790445122.651276,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -81085.43628301658
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792501200,
+              "signal_bar_ts": 1792497600,
+              "N": 92695428.2350221,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 120413657.85210744,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792573200,
+              "signal_bar_ts": 1792569600,
+              "N": 108589675.09136076,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792076400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792288800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792310400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792335600,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792400400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792501200,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792573200,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s1_20_10_unfiltered": {
+          "net_return_pct": -4.951012854876014,
+          "net_pnl_tmn": -247550.64274380077,
+          "final_equity_tmn": 4752449.357256199,
+          "max_drawdown_pct": 4.951012854876014,
+          "trades": 3,
+          "wins": 0,
+          "fees_tmn": 87790.36624031943,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792501200,
+              "exit_ts": 1792504800,
+              "entry_fill": 21450708423.143997,
+              "exit_fill": 21244052249.10728,
+              "quantity": 0.00023239534877203552,
+              "stop_raw_price": 21265317566.673954,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -77792.1250326559
+            },
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 21664191865.315998,
+              "exit_fill": 21401941185.062172,
+              "quantity": 0.0002265252010885304,
+              "stop_raw_price": 21423364549.611782,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -88673.0814281283
+            },
+            {
+              "entry_ts": 1792573200,
+              "exit_ts": 1792652400,
+              "entry_fill": 22007624472.833996,
+              "exit_fill": 21768654677.528625,
+              "quantity": 0.00021897309120324506,
+              "stop_raw_price": 21790445122.651276,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -81085.43628301658
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792501200,
+              "signal_bar_ts": 1792497600,
+              "N": 92695428.2350221,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 120413657.85210744,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792573200,
+              "signal_bar_ts": 1792569600,
+              "N": 108589675.09136076,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792076400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792288800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792310400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792335600,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792400400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792501200,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792573200,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s2_55_20": {
+          "net_return_pct": -1.677559793122818,
+          "net_pnl_tmn": -83877.98965614103,
+          "final_equity_tmn": 4916122.010343859,
+          "max_drawdown_pct": 3.6189419910544585,
+          "trades": 1,
+          "wins": 0,
+          "fees_tmn": 29747.878860034412,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792573200,
+              "exit_ts": 1792652400,
+              "entry_fill": 22007624472.833996,
+              "exit_fill": 21768654677.528625,
+              "quantity": 0.0002265144460074408,
+              "stop_raw_price": 21790445122.651276,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -83877.98965614103
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792573200,
+              "signal_bar_ts": 1792569600,
+              "N": 108589675.09136076,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792076400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792288800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792310400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792335600,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792400400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792501200,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792573200,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        }
+      },
+      "PUMPTMN": {
+        "buy_hold_all_in": {
+          "net_return_pct": 11.389048565926263,
+          "net_pnl_tmn": 569452.4282963136,
+          "max_drawdown_pct": 6.676342525399126,
+          "trades": 1,
+          "wins": 1,
+          "fees_tmn": 31713.767780653638,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792465200,
+              "exit_ts": 1792670400,
+              "pnl_tmn": 569452.4282963136
+            }
+          ]
+        },
+        "s1_20_10_filtered": {
+          "net_return_pct": -5.0913711229294005,
+          "net_pnl_tmn": -254568.5561464699,
+          "final_equity_tmn": 4745431.44385353,
+          "max_drawdown_pct": 5.0913711229294005,
+          "trades": 2,
+          "wins": 0,
+          "fees_tmn": 58028.24462984963,
+          "total_stop_triggered": true,
+          "trade_log": [
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 1227.2259999999999,
+              "exit_fill": 1184.9685721686624,
+              "quantity": 4062.0430673761716,
+              "stop_raw_price": 1186.154726895558,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -201046.80648455303
+            },
+            {
+              "entry_ts": 1792530000,
+              "exit_ts": 1792533600,
+              "entry_fill": 1247.2459999999999,
+              "exit_fill": 1240.758,
+              "quantity": 3836.131280701209,
+              "stop_raw_price": 1197.09572917203,
+              "reason": "portfolio_stop_next_open",
+              "pnl_tmn": -53521.74966191687
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 20.535636552220954,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792530000,
+              "signal_bar_ts": 1792526400,
+              "N": 25.075135413984956,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792544400,
+              "signal_bar_ts": 1792540800,
+              "N": 25.481048264287086,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            },
+            {
+              "ts": 1792598400,
+              "signal_bar_ts": 1792594800,
+              "N": 24.58669229633,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            },
+            {
+              "ts": 1792605600,
+              "signal_bar_ts": 1792602000,
+              "N": 25.114489797437823,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792274400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792378800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792530000,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s1_20_10_unfiltered": {
+          "net_return_pct": -5.0913711229294005,
+          "net_pnl_tmn": -254568.5561464699,
+          "final_equity_tmn": 4745431.44385353,
+          "max_drawdown_pct": 5.0913711229294005,
+          "trades": 2,
+          "wins": 0,
+          "fees_tmn": 58028.24462984963,
+          "total_stop_triggered": true,
+          "trade_log": [
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 1227.2259999999999,
+              "exit_fill": 1184.9685721686624,
+              "quantity": 4062.0430673761716,
+              "stop_raw_price": 1186.154726895558,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -201046.80648455303
+            },
+            {
+              "entry_ts": 1792530000,
+              "exit_ts": 1792533600,
+              "entry_fill": 1247.2459999999999,
+              "exit_fill": 1240.758,
+              "quantity": 3836.131280701209,
+              "stop_raw_price": 1197.09572917203,
+              "reason": "portfolio_stop_next_open",
+              "pnl_tmn": -53521.74966191687
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 20.535636552220954,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792530000,
+              "signal_bar_ts": 1792526400,
+              "N": 25.075135413984956,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792544400,
+              "signal_bar_ts": 1792540800,
+              "N": 25.481048264287086,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            },
+            {
+              "ts": 1792598400,
+              "signal_bar_ts": 1792594800,
+              "N": 24.58669229633,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            },
+            {
+              "ts": 1792605600,
+              "signal_bar_ts": 1792602000,
+              "N": 25.114489797437823,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792274400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792378800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792530000,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s2_55_20": {
+          "net_return_pct": -5.0913711229294005,
+          "net_pnl_tmn": -254568.5561464699,
+          "final_equity_tmn": 4745431.44385353,
+          "max_drawdown_pct": 5.0913711229294005,
+          "trades": 2,
+          "wins": 0,
+          "fees_tmn": 58028.24462984963,
+          "total_stop_triggered": true,
+          "trade_log": [
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 1227.2259999999999,
+              "exit_fill": 1184.9685721686624,
+              "quantity": 4062.0430673761716,
+              "stop_raw_price": 1186.154726895558,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -201046.80648455303
+            },
+            {
+              "entry_ts": 1792530000,
+              "exit_ts": 1792533600,
+              "entry_fill": 1247.2459999999999,
+              "exit_fill": 1240.758,
+              "quantity": 3836.131280701209,
+              "stop_raw_price": 1197.09572917203,
+              "reason": "portfolio_stop_next_open",
+              "pnl_tmn": -53521.74966191687
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 20.535636552220954,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792530000,
+              "signal_bar_ts": 1792526400,
+              "N": 25.075135413984956,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792544400,
+              "signal_bar_ts": 1792540800,
+              "N": 25.481048264287086,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            },
+            {
+              "ts": 1792598400,
+              "signal_bar_ts": 1792594800,
+              "N": 24.58669229633,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            },
+            {
+              "ts": 1792605600,
+              "signal_bar_ts": 1792602000,
+              "N": 25.114489797437823,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": true
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792274400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792378800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792530000,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        }
+      }
+    },
+    "zero_cost_diagnostic": {
+      "BTCTMN": {
+        "buy_hold_all_in": {
+          "net_return_pct": 4.157350962137629,
+          "net_pnl_tmn": 207867.5481068818,
+          "max_drawdown_pct": 2.9470688510239373,
+          "trades": 1,
+          "wins": 1,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792465200,
+              "exit_ts": 1792670400,
+              "pnl_tmn": 207867.5481068818
+            }
+          ]
+        },
+        "s1_20_10_filtered": {
+          "net_return_pct": -2.9366321853315225,
+          "net_pnl_tmn": -146831.60926657636,
+          "final_equity_tmn": 4853168.390733424,
+          "max_drawdown_pct": 3.7161864080407114,
+          "trades": 3,
+          "wins": 0,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792501200,
+              "exit_ts": 1792504800,
+              "entry_fill": 21429279144.0,
+              "exit_fill": 21243888287.529957,
+              "quantity": 0.00023332562735316992,
+              "stop_raw_price": 21243888287.529957,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -43256.43789141439
+            },
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 21642549316.0,
+              "exit_fill": 21401722000.295784,
+              "quantity": 0.00022902771248136384,
+              "stop_raw_price": 21401722000.295784,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -55156.12921876367
+            },
+            {
+              "entry_ts": 1792573200,
+              "exit_ts": 1792652400,
+              "entry_fill": 21985638834.0,
+              "exit_fill": 21768459483.81728,
+              "quantity": 0.00022294496284136595,
+              "stop_raw_price": 21768459483.81728,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -48419.042156398296
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792501200,
+              "signal_bar_ts": 1792497600,
+              "N": 92695428.2350221,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 120413657.85210744,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792573200,
+              "signal_bar_ts": 1792569600,
+              "N": 108589675.09136076,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792076400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792288800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792310400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792335600,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792400400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792501200,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792573200,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s1_20_10_unfiltered": {
+          "net_return_pct": -2.9366321853315225,
+          "net_pnl_tmn": -146831.60926657636,
+          "final_equity_tmn": 4853168.390733424,
+          "max_drawdown_pct": 3.7161864080407114,
+          "trades": 3,
+          "wins": 0,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792501200,
+              "exit_ts": 1792504800,
+              "entry_fill": 21429279144.0,
+              "exit_fill": 21243888287.529957,
+              "quantity": 0.00023332562735316992,
+              "stop_raw_price": 21243888287.529957,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -43256.43789141439
+            },
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 21642549316.0,
+              "exit_fill": 21401722000.295784,
+              "quantity": 0.00022902771248136384,
+              "stop_raw_price": 21401722000.295784,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -55156.12921876367
+            },
+            {
+              "entry_ts": 1792573200,
+              "exit_ts": 1792652400,
+              "entry_fill": 21985638834.0,
+              "exit_fill": 21768459483.81728,
+              "quantity": 0.00022294496284136595,
+              "stop_raw_price": 21768459483.81728,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -48419.042156398296
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792501200,
+              "signal_bar_ts": 1792497600,
+              "N": 92695428.2350221,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 120413657.85210744,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792573200,
+              "signal_bar_ts": 1792569600,
+              "N": 108589675.09136076,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792076400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792288800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792310400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792335600,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792400400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792501200,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792573200,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s2_55_20": {
+          "net_return_pct": -0.987823696288781,
+          "net_pnl_tmn": -49391.184814439155,
+          "final_equity_tmn": 4950608.815185561,
+          "max_drawdown_pct": 3.7161864080407003,
+          "trades": 1,
+          "wins": 0,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792573200,
+              "exit_ts": 1792652400,
+              "entry_fill": 21985638834.0,
+              "exit_fill": 21768459483.81728,
+              "quantity": 0.00022742118333480852,
+              "stop_raw_price": 21768459483.81728,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -49391.184814439155
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792573200,
+              "signal_bar_ts": 1792569600,
+              "N": 108589675.09136076,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792076400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792288800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792310400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792335600,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792400400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792501200,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792573200,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        }
+      },
+      "PUMPTMN": {
+        "buy_hold_all_in": {
+          "net_return_pct": 12.283737024221452,
+          "net_pnl_tmn": 614186.8512110729,
+          "max_drawdown_pct": 6.676342525399126,
+          "trades": 1,
+          "wins": 1,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792465200,
+              "exit_ts": 1792670400,
+              "pnl_tmn": 614186.8512110729
+            }
+          ]
+        },
+        "s1_20_10_filtered": {
+          "net_return_pct": -0.1697260588150673,
+          "net_pnl_tmn": -8486.302940753289,
+          "final_equity_tmn": 4991513.697059247,
+          "max_drawdown_pct": 6.676342525399114,
+          "trades": 2,
+          "wins": 1,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 1226.0,
+              "exit_fill": 1184.9287268955582,
+              "quantity": 4078.3034257748777,
+              "stop_raw_price": 1184.9287268955582,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -167501.1138027804
+            },
+            {
+              "entry_ts": 1792530000,
+              "exit_ts": 1792652400,
+              "entry_fill": 1246.0,
+              "exit_fill": 1287.0,
+              "quantity": 3878.410021025056,
+              "stop_raw_price": 1195.84972917203,
+              "reason": "channel_exit",
+              "pnl_tmn": 159014.8108620271
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 20.535636552220954,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792530000,
+              "signal_bar_ts": 1792526400,
+              "N": 25.075135413984956,
+              "reason": "20h_filtered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792274400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792378800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792530000,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s1_20_10_unfiltered": {
+          "net_return_pct": -0.1697260588150673,
+          "net_pnl_tmn": -8486.302940753289,
+          "final_equity_tmn": 4991513.697059247,
+          "max_drawdown_pct": 6.676342525399114,
+          "trades": 2,
+          "wins": 1,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 1226.0,
+              "exit_fill": 1184.9287268955582,
+              "quantity": 4078.3034257748777,
+              "stop_raw_price": 1184.9287268955582,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -167501.1138027804
+            },
+            {
+              "entry_ts": 1792530000,
+              "exit_ts": 1792652400,
+              "entry_fill": 1246.0,
+              "exit_fill": 1287.0,
+              "quantity": 3878.410021025056,
+              "stop_raw_price": 1195.84972917203,
+              "reason": "channel_exit",
+              "pnl_tmn": 159014.8108620271
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 20.535636552220954,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792530000,
+              "signal_bar_ts": 1792526400,
+              "N": 25.075135413984956,
+              "reason": "20h_unfiltered_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792274400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792378800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792530000,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        },
+        "s2_55_20": {
+          "net_return_pct": 0.6835241458104546,
+          "net_pnl_tmn": 34176.207290522754,
+          "final_equity_tmn": 5034176.207290523,
+          "max_drawdown_pct": 6.676342525399114,
+          "trades": 2,
+          "wins": 1,
+          "fees_tmn": 0.0,
+          "total_stop_triggered": false,
+          "trade_log": [
+            {
+              "entry_ts": 1792508400,
+              "exit_ts": 1792508400,
+              "entry_fill": 1226.0,
+              "exit_fill": 1184.9287268955582,
+              "quantity": 4078.3034257748777,
+              "stop_raw_price": 1184.9287268955582,
+              "reason": "2N_intrahour_stop",
+              "pnl_tmn": -167501.1138027804
+            },
+            {
+              "entry_ts": 1792530000,
+              "exit_ts": 1792670400,
+              "entry_fill": 1246.0,
+              "exit_fill": 1298.0,
+              "quantity": 3878.410021025056,
+              "stop_raw_price": 1195.84972917203,
+              "reason": "end_of_test",
+              "pnl_tmn": 201677.32109330315
+            }
+          ],
+          "entry_decisions": [
+            {
+              "ts": 1792508400,
+              "signal_bar_ts": 1792504800,
+              "N": 20.535636552220954,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            },
+            {
+              "ts": 1792530000,
+              "signal_bar_ts": 1792526400,
+              "N": 25.075135413984956,
+              "reason": "55h_breakout",
+              "previous_virtual_winner": false,
+              "blocked": false
+            }
+          ],
+          "virtual_breakout_events": [
+            {
+              "ts": 1792166400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792274400,
+              "side": -1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792378800,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792508400,
+              "side": 1,
+              "previous_winner": false
+            },
+            {
+              "ts": 1792530000,
+              "side": 1,
+              "previous_winner": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

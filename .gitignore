@@ -5,3 +5,10 @@ __pycache__/
 *.pyc
 .venv/
 results/private/
+.secrets/
+.env.*
+!.env.example
+release/*.zip
+work/
+results/credit-validation/*.jsonl
+*.lock

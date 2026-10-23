@@ -1,4 +1,6 @@
-# Implementation and release status
+# Archived initial implementation status
+
+**Superseded 2026-10-23:** current implementation and limitations are in the root README and CREDIT_RUNBOOK_FA.md. Credit routing is now documented with both a dedicated credit API key and `sub-account-client-id`; `credit_api.py` and `credit_runner.py` implement it. Private-account/live verification is still pending credentials, but missing routing documentation is no longer the blocker. The table below records the earlier prototype, not current execution status.
 
 | Item | Status | Evidence / next requirement |
 |---|---|---|

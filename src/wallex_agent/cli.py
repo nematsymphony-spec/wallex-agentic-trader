@@ -43,7 +43,7 @@ def main(argv=None) -> int:
     shadow.add_argument("--cycles", type=int, default=1)
     shadow.add_argument("--forever", action="store_true")
     shadow.add_argument("--interval", type=int, default=3600)
-    live = sub.add_parser("live", help="Fail-closed until credit-account order routing is proven")
+    live = sub.add_parser("live", help="See the separate credit-account execution CLI")
     verify = sub.add_parser("verify-log", help="Verify hash chain of audit events")
     verify.add_argument("db")
     export = sub.add_parser("export-log", help="Print audit events as JSON")
@@ -74,7 +74,7 @@ def main(argv=None) -> int:
                 if args.forever or i < args.cycles:
                     time.sleep(args.interval)
         elif args.command == "live":
-            print("LIVE DISABLED: official spot order endpoint does not document credit subaccount routing. No order was sent.", file=sys.stderr)
+            print("Use python3 -m wallex_agent.credit_runner run --help; legacy Engine is simulation-only. See docs/CREDIT_RUNBOOK_FA.md. No order sent.", file=sys.stderr)
             return 3
         elif args.command == "verify-log":
             good = AuditLog(args.db).verify()

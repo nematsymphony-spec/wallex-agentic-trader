@@ -1,0 +1,60 @@
+test_actual_fee_required_and_upper_bound_enforced (test_credit.CreditTests) ... ok
+test_ai_missing_invalid_and_veto (test_credit.CreditTests) ... ok
+test_both_credit_headers_on_every_request (test_credit.CreditTests) ... ok
+test_closeout_takes_priority_and_remainder_keeps_exit_reason (test_credit.CreditTests) ... ok
+test_no_redirects_and_no_unverified_create (test_credit.CreditTests) ... ok
+test_order_costs_fee_reserve_and_depth (test_credit.CreditTests) ... ok
+test_paper_entry_protective_exit_and_restart (test_credit.CreditTests) ... ok
+test_partial_buy_cancel_reconciles_wallet_exactly_once (test_credit.CreditTests) ... ok
+test_restart_binding_and_external_wallet_change_block (test_credit.CreditTests) ... ok
+test_shared_relative_score_matches_old_formula (test_credit.CreditTests) ... ok
+test_two_processes_cannot_own_same_state (test_credit.CreditTests) ... ok
+test_unknown_post_persists_and_never_reposts (test_credit.CreditTests) ... ok
+test_unmanaged_assets_cannot_be_adopted (test_credit.CreditTests) ... ok
+test_wallet_link_and_expiry_block (test_credit.CreditTests) ... ok
+test_wrong_main_suspended_or_package_account_blocks (test_credit.CreditTests) ... ok
+test_backtest_fills_at_next_open (test_trader.AuditTests) ... ok
+test_duplicate_order_and_tamper_detection (test_trader.AuditTests) ... ok
+test_live_command_is_blocked (test_trader.AuditTests) ... Use python3 -m wallex_agent.credit_runner run --help; legacy Engine is simulation-only. See docs/CREDIT_RUNBOOK_FA.md. No order sent.
+ok
+test_bad_model_output_fails_closed (test_trader.GuardrailTests) ... ok
+test_disallowed_market_never_orders (test_trader.GuardrailTests) ... ok
+test_global_ai_rejects_symbol_outside_shortlist (test_trader.GuardrailTests) ... ok
+test_global_ai_selects_one_eligible_market_from_full_list (test_trader.GuardrailTests) ... ok
+test_package_exclusion_snapshot_survives_incomplete_api_list (test_trader.GuardrailTests) ... ok
+test_position_and_drawdown_limits (test_trader.GuardrailTests) ... ok
+test_position_scales_down_to_two_sided_depth (test_trader.GuardrailTests) ... ok
+test_six_complete_twelve_hour_windows_use_three_day_weights (test_trader.GuardrailTests) ... ok
+test_spread_filter (test_trader.GuardrailTests) ... ok
+test_thin_exit_book_blocks_buy (test_trader.GuardrailTests) ... ok
+test_volatility_is_bounded_ranking_bonus (test_trader.GuardrailTests) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.042s
+
+OK
+
+test_future_local_prices_do_not_change_current_features (test_remaining_move_model.RemainingMoveIntegrityTests) ... ok
+test_labels_crossing_split_are_purged (test_remaining_move_model.RemainingMoveIntegrityTests) ... ok
+test_one_all_in_roundtrip_matches_independent_cost_formula (test_remaining_move_model.RemainingMoveIntegrityTests) ... ok
+test_book_cost_does_not_double_count_spread (test_research30.ResearchAccountingTests) ... ok
+test_feature_prefix_invariant_to_future_prices (test_research30.ResearchAccountingTests) ... ok
+test_flat_roundtrip_reserves_fee_and_uses_two_sides (test_research30.ResearchAccountingTests) ... ok
+test_global_loss_halt_persists_but_block_budget_can_reset (test_research30.ResearchAccountingTests) ... ok
+test_intrahour_ambiguity_is_not_silently_chosen (test_research30.ResearchAccountingTests) ... ok
+test_periodic_goal_compounds_and_resumes_next_block (test_research30.ResearchAccountingTests) ... ok
+test_profit_goal_is_net_of_fees_and_stops_future_buys (test_research30.ResearchAccountingTests) ... ok
+test_zero_volume_bar_cannot_be_an_entry (test_research30.ResearchAccountingTests) ... ok
+test_N_seed_and_recursion (test_turtle_hourly.TurtleTests) ... ok
+test_channel_excludes_signal_bar (test_turtle_hourly.TurtleTests) ... ok
+test_future_data_cannot_change_first_entry (test_turtle_hourly.TurtleTests) ... ok
+test_gap_stop_uses_open_and_reserves_buy_fee (test_turtle_hourly.TurtleTests) ... ok
+test_all_in_fees_and_two_minutes_after_delayed_fill (test_two_minute_strategy.TwoMinuteExecutionTests) ... ok
+test_execution_label_crossing_boundary_is_not_training (test_two_minute_strategy.TwoMinuteExecutionTests) ... ok
+test_fill_uses_future_execution_price_not_signal_price (test_two_minute_strategy.TwoMinuteExecutionTests) ... ok
+test_invalid_or_below_hurdle_never_buys (test_two_minute_strategy.TwoMinuteExecutionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 1.497s
+
+OK

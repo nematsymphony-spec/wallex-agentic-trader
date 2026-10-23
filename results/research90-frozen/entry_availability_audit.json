@@ -1,0 +1,47 @@
+{
+  "description": "Candidates ranked using past data only; actual coming-hour trades used solely to model fill/no fill of first choice, without substitution by runner-up. Unfilled choice expires at hourly review.",
+  "checks": [
+    {
+      "days": 30,
+      "goal": "3",
+      "same_return_and_trades": true,
+      "causal_return_pct": 3.2288757824166403,
+      "unresolved_minutes": 0
+    },
+    {
+      "days": 30,
+      "goal": "5",
+      "same_return_and_trades": true,
+      "causal_return_pct": 5.276269110845444,
+      "unresolved_minutes": 0
+    },
+    {
+      "days": 60,
+      "goal": "3",
+      "same_return_and_trades": true,
+      "causal_return_pct": 3.5903100941000243,
+      "unresolved_minutes": 0
+    },
+    {
+      "days": 60,
+      "goal": "5",
+      "same_return_and_trades": true,
+      "causal_return_pct": 6.274179618019993,
+      "unresolved_minutes": 0
+    },
+    {
+      "days": 90,
+      "goal": "3",
+      "same_return_and_trades": true,
+      "causal_return_pct": -5.661989209617547,
+      "unresolved_minutes": 0
+    },
+    {
+      "days": 90,
+      "goal": "5",
+      "same_return_and_trades": true,
+      "causal_return_pct": -5.661989209617547,
+      "unresolved_minutes": 0
+    }
+  ]
+}
